@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Memory Game</title>
+</head>
+
+<body>
+
+    <h2>Memory Game</h2>
+
+    <div id="game"></div>
+
+    <h2 id="message"></h2>
+
+    <button id="restart" onclick="restartGame()" style="display:none;">
+        Restart Game
+    </button>
+
+    <script>
+
+        let numbers = [1, 2, 3, 4, 1, 2, 3, 4];
+
+        let firstCard = null;
+        let secondCard = null;
+        let matched = 0;
+        let lock = false;
+
+        function startGame() {
+
+            document.getElementById("game").innerHTML = "";
+            document.getElementById("message").innerText = "";
+            document.getElementById("restart").style.display = "none";
+
+            firstCard = null;
+            secondCard = null;
+            matched = 0;
+            lock = false;
+
+            numbers.sort(() => Math.random() - 0.5);
+
+            numbers.forEach(function(number) {
+
+                let card = document.createElement("button");
+
+                card.innerText = "?";
+
+                card.style.width = "70px";
+                card.style.height = "70px";
+                card.style.margin = "5px";
+                card.style.fontSize = "25px";
+
+                card.onclick = function() {
+
+                    if (lock || card === firstCard) {
+                        return;
+                    }
+
+                    card.innerText = number;
+
+                    if (firstCard === null) {
+
+                        firstCard = card;
+
+                    } else {
+
+                        secondCard = card;
+                        lock = true;
+
+                        if (firstCard.innerText === secondCard.innerText) {
+
+                            matched++;
+
+                            firstCard = null;
+                            secondCard = null;
+                            lock = false;
+
+                            if (matched === 4) {
+                                document.getElementById("message").innerText =
+                                    "🎉 You Win!";
+
+                                document.getElementById("restart").style.display =
+                                    "inline-block";
+                            }
+
+                        } else {
+
+                            setTimeout(function() {
+
+                                firstCard.innerText = "?";
+                                secondCard.innerText = "?";
+
+                                firstCard = null;
+                                secondCard = null;
+                                lock = false;
+
+                            }, 800);
+                        }
+                    }
+                };
+
+                document.getElementById("game").appendChild(card);
+            });
+        }
+
+        function restartGame() {
+            startGame();
+        }
+
+        startGame();
+
+    </script>
+
+</body>
+</html>

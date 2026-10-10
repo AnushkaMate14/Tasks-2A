@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Delegation</title>
+</head>
+
+<body>
+
+    <h2>Card List</h2>
+
+    <div id="cards">
+
+        <div class="card">Card 1</div>
+        <div class="card">Card 2</div>
+        <div class="card">Card 3</div>
+        <div class="card">Card 4</div>
+
+    </div>
+
+    <script>
+
+        document.getElementById("cards").addEventListener("click", function(event) {
+
+            if (event.target.classList.contains("card")) {
+
+                alert(event.target.innerText + " clicked!");
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>

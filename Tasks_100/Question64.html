@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Theme Switcher</title>
+
+    <style>
+        body {
+            background: white;
+            color: black;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .dark {
+            background: #222;
+            color: white;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body id="page">
+
+    <h2>Theme Switcher</h2>
+
+    <p>Click the button to change the theme.</p>
+
+    <button onclick="changeTheme()">Dark Mode</button>
+
+    <script>
+
+        function changeTheme() {
+
+            let page = document.getElementById("page");
+            let button = document.querySelector("button");
+
+            page.classList.toggle("dark");
+
+            if (page.classList.contains("dark")) {
+                button.innerText = "Light Mode";
+            } else {
+                button.innerText = "Dark Mode";
+            }
+        }
+
+    </script>
+
+</body>
+</html>

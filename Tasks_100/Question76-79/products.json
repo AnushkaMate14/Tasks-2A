@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "name": "T-Shirt",
+        "category": "Clothes",
+        "price": 500,
+        "description": "Comfortable cotton T-shirt"
+    },
+    {
+        "id": 2,
+        "name": "Shoes",
+        "category": "Footwear",
+        "price": 1200,
+        "description": "Comfortable casual shoes"
+    },
+    {
+        "id": 3,
+        "name": "Watch",
+        "category": "Accessories",
+        "price": 800,
+        "description": "Stylish wrist watch"
+    },
+    {
+        "id": 4,
+        "name": "Jeans",
+        "category": "Clothes",
+        "price": 1000,
+        "description": "Classic blue jeans"
+    }
+]

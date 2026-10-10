@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Journey Timeline</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            padding: 30px;
+        }
+
+        .timeline {
+            width: 400px;
+            margin: auto;
+        }
+
+        .item {
+            position: relative;
+            padding: 20px 20px 20px 50px;
+            border-left: 3px solid #4a90e2;
+        }
+
+        .item::before {
+            content: "";
+            position: absolute;
+            left: -9px;
+            top: 20px;
+            width: 15px;
+            height: 15px;
+            background: #4a90e2;
+            border-radius: 50%;
+        }
+        .item::after {
+            content: "";
+            position: absolute;
+            left: -3px;
+            bottom: 0;
+            height: 20px;
+            border-left: 3px solid white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="timeline">
+        <div class="item">
+            <h3>2024 - Joined College</h3>
+            <p>Started BCA journey.</p>
+        </div>
+
+        <div class="item">
+            <h3>2025 - Learned Web Development</h3>
+            <p>Learned HTML, CSS and JavaScript.</p>
+        </div>
+
+        <div class="item">
+            <h3>2026 - Internship</h3>
+            <p>Started professional training.</p>
+        </div>
+
+        <div class="item">
+            <h3>2027 - Career</h3>
+            <p>Ready for a developer role.</p>
+        </div>
+
+    </div>
+
+</body>
+</html>

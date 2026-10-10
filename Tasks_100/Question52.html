@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+</head>
+
+<body>
+
+    <h2>Registration Form</h2>
+
+    <form>
+
+        <input type="text" id="name" placeholder="Enter name">
+        <p id="nameError"></p>
+
+        <input type="email" id="email" placeholder="Enter email">
+        <p id="emailError"></p>
+
+        <input type="password" id="password" placeholder="Enter password">
+        <p id="passwordError"></p>
+
+        <button type="submit">Submit</button>
+
+    </form>
+
+    <script>
+
+        document.getElementById("name").addEventListener("input", function () {
+
+            if (this.value === "") {
+                document.getElementById("nameError").innerText =
+                    "Name is required";
+            } else {
+                document.getElementById("nameError").innerText = "";
+            }
+
+        });
+
+
+        document.getElementById("email").addEventListener("input", function () {
+
+            if (this.value === "") {
+                document.getElementById("emailError").innerText =
+                    "Email is required";
+            } else {
+                document.getElementById("emailError").innerText = "";
+            }
+
+        });
+
+
+        document.getElementById("password").addEventListener("input", function () {
+
+            if (this.value.length < 6) {
+                document.getElementById("passwordError").innerText =
+                    "Password must be at least 6 characters";
+            } else {
+                document.getElementById("passwordError").innerText = "";
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>

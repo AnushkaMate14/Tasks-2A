@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Word and Character Counter</title>
+</head>
+<body>
+
+    <h2>Word and Character Counter</h2>
+
+    <textarea id="text" rows="6" cols="40"
+        placeholder="Type your text..."></textarea>
+
+    <p>Characters: <span id="characters">0</span></p>
+    <p>Words: <span id="words">0</span></p>
+
+    <script>
+        document.getElementById("text").addEventListener("input", function () {
+
+            let text = this.value;
+
+            // Character count
+            document.getElementById("characters").innerText = text.length;
+
+            // Word count
+            let words = text.trim();
+
+            if (words === "") {
+                document.getElementById("words").innerText = 0;
+            } else {
+                document.getElementById("words").innerText =
+                    words.split(/\s+/).length;
+            }
+        });
+    </script>
+
+</body>
+</html>

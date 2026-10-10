@@ -1,0 +1,128 @@
+<!-- 14. Flexbox Design pricing plan cards layout using Flexbox. -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pricing Plans</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .card {
+            width: 250px;
+            background-color: white;
+            padding: 25px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h2 {
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .card p {
+            margin: 10px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Pricing Plans</h1>
+
+    <div class="pricing-container">
+
+        <div class="card">
+
+            <h2>Basic</h2>
+
+            <div class="price">₹299</div>
+
+            <p>5 Projects</p>
+            <p>10 GB Storage</p>
+            <p>Email Support</p>
+
+            <button>Choose Plan</button>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Standard</h2>
+
+            <div class="price">₹599</div>
+
+            <p>10 Projects</p>
+            <p>50 GB Storage</p>
+            <p>Email Support</p>
+
+            <button>Choose Plan</button>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Premium</h2>
+
+            <div class="price">₹999</div>
+
+            <p>Unlimited Projects</p>
+            <p>100 GB Storage</p>
+            <p>Priority Support</p>
+
+            <button>Choose Plan</button>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

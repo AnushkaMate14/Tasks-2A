@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Data Table</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #2563eb;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        #message {
+            text-align: center;
+            margin: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Users Information</h1>
+
+    <p id="message">Loading data...</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>City</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+
+        <tbody id="userTable">
+        </tbody>
+    </table>
+
+    <script>let userTable = document.getElementById("userTable");
+let message = document.getElementById("message");
+
+let apiURL = "https://jsonplaceholder.typicode.com/users";
+
+async function getUsers() {
+    try {
+        let response = await fetch(apiURL);
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch data");
+        }
+
+        let users = await response.json();
+
+        userTable.innerHTML = "";
+
+        users.forEach(user => {
+            let row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+                <td>${user.username}</td>
+                <td>${user.email}</td>
+                <td>${user.address.city}</td>
+                <td>${user.phone}</td>
+            `;
+
+            userTable.appendChild(row);
+        });
+
+        message.innerText = `Total Users: ${users.length}`;
+
+    } catch (error) {
+        message.innerText = error.message;
+    }
+}
+
+getUsers();</script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!-- 8.Keyboard Accessibility Make a dropdown menu accessible with keyboard navigation. -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Navbar Dropdown</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      nav {
+        background-color: #0f4c81;
+        padding: 15px 30px;
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 30px;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-family: Arial, sans-serif;
+      }
+
+      summary {
+        color: white;
+        cursor: pointer;
+        font-family: Arial, sans-serif;
+      }
+
+      details {
+        position: relative;
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: 25px;
+        left: 0;
+        background-color: white;
+        width: 150px;
+        padding: 10px 0;
+      }
+
+      .dropdown-menu a {
+        display: block;
+        color: black;
+        padding: 10px;
+      }
+
+      .dropdown-menu a:hover {
+        background-color: lightblue;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <ul>
+        <li>
+          <a href="#">Home</a>
+        </li>
+
+        <li>
+          <a href="#">About</a>
+        </li>
+
+        <li>
+          <details>
+            <summary>Courses</summary>
+
+            <div class="dropdown-menu">
+              <a href="#">Java</a>
+              <a href="#">HTML</a>
+              <a href="#">CSS</a>
+              <a href="#">JavaScript</a>
+            </div>
+          </details>
+        </li>
+
+        <li>
+          <a href="#">Contact</a>
+        </li>
+      </ul>
+    </nav>
+  </body>
+</html>

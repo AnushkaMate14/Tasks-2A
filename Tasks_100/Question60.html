@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Star Rating</title>
+
+    <style>
+        .star {
+            font-size: 40px;
+            color: gray;
+            cursor: pointer;
+        }
+
+        .active {
+            color: gold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Rate Us</h2>
+
+    <div id="stars">
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+    </div>
+
+    <p id="rating">Rating: 0/5</p>
+
+    <script>
+
+        let stars = document.querySelectorAll(".star");
+        let rating = document.getElementById("rating");
+
+        stars.forEach(function(star, index) {
+
+            star.addEventListener("click", function() {
+
+                stars.forEach(function(s) {
+                    s.classList.remove("active");
+                });
+
+                for (let i = 0; i <= index; i++) {
+                    stars[i].classList.add("active");
+                }
+
+                rating.innerText = "Rating: " + (index + 1) + "/5";
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>

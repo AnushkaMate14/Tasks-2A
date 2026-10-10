@@ -1,0 +1,189 @@
+<!-- 3. Accessibility Design an accessible student registration form using labels and aria-label attributes. -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessible Student Registration Form</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#f4f4f4;
+        }
+
+        .container{
+            width:450px;
+            margin:40px auto;
+            background:white;
+            padding:25px;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,0.2);
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:20px;
+            color:#0f4c81;
+        }
+
+        fieldset{
+            border:2px solid #0f4c81;
+            padding:20px;
+            border-radius:8px;
+        }
+
+        legend{
+            font-weight:bold;
+            color:#0f4c81;
+        }
+
+        label{
+            display:block;
+            margin-top:15px;
+            font-weight:bold;
+        }
+
+        input,
+        select,
+        textarea{
+            width:100%;
+            padding:10px;
+            margin-top:6px;
+            border:1px solid #ccc;
+            border-radius:5px;
+        }
+
+        textarea{
+            resize:vertical;
+        }
+
+        button{
+            width:100%;
+            margin-top:20px;
+            padding:12px;
+            border:none;
+            background:#0f4c81;
+            color:white;
+            font-size:16px;
+            border-radius:5px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#083358;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Student Registration Form</h2>
+
+<form>
+
+<fieldset>
+
+<legend>Student Details</legend>
+
+<label for="fname">First Name</label>
+<input
+type="text"
+id="fname"
+name="fname"
+placeholder="Enter First Name"
+required>
+
+<label for="lname">Last Name</label>
+<input
+type="text"
+id="lname"
+name="lname"
+placeholder="Enter Last Name"
+required>
+
+<label for="email">Email</label>
+<input
+type="email"
+id="email"
+name="email"
+placeholder="Enter Email"
+required>
+
+<label for="phone">Phone Number</label>
+<input
+type="tel"
+id="phone"
+name="phone"
+placeholder="Enter Phone Number"
+required>
+
+<label for="gender">Gender</label>
+
+<select
+id="gender"
+name="gender">
+
+<option>Select Gender</option>
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+
+</select>
+
+<label for="course">Course</label>
+
+<select
+id="course"
+name="course">
+
+<option>BCA</option>
+<option>BBA</option>
+<option>B.Com</option>
+<option>MCA</option>
+
+</select>
+
+<label for="address">Address</label>
+
+<textarea
+id="address"
+rows="4"
+placeholder="Enter Address"></textarea>
+
+<!-- aria-label Example -->
+
+<input
+type="search"
+placeholder="Search Student"
+aria-label="Search Student">
+
+<button
+type="submit"
+aria-label="Submit Registration Form">
+
+Register
+
+</button>
+
+</fieldset>
+
+</form>
+
+</div>
+
+</body>
+
+</html>

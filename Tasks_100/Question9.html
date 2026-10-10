@@ -1,0 +1,122 @@
+<!-- 9.HTML5 Forms Create an event registration form using HTML5 validation (required,pattern, type). -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Event Registration Form</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background-color: #f4f4f4;
+        padding: 40px;
+      }
+
+      .container {
+        margin: auto;
+        background-color: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      h2 {
+        text-align: center;
+        color: #0f4c81;
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 6px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        width: 100%;
+        margin-top: 20px;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        background-color: #0f4c81;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #083358;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Event Registration Form</h2>
+
+      <form>
+        <label for="name">Full Name</label>
+
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Enter your full name"
+          required
+          pattern="[A-Za-z ]+"
+        />
+        <label for="email">Email</label>
+
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+        />
+
+        <label for="phone">Phone Number</label>
+
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="Enter 10-digit phone number"
+          required
+          pattern="[0-9]{10}"
+        />
+        <label for="date">Event Date</label>
+
+        <input type="date" id="date" name="date" required />
+
+        <label for="event">Select Event</label>
+
+        <select id="event" name="event" required>
+          <option value="">Select an event</option>
+          <option value="workshop">Workshop</option>
+          <option value="seminar">Seminar</option>
+          <option value="conference">Conference</option>
+        </select>
+
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  </body>
+</html>

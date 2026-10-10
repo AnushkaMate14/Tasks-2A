@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debounce Search</title>
+</head>
+<body>
+
+    <h2>Search</h2>
+
+    <input type="text" id="search" placeholder="Type something...">
+
+    <p id="result"></p>
+
+    <script>
+        function debounce(callback, delay) {
+            let timer;
+
+            return function () {
+                clearTimeout(timer);
+
+                timer = setTimeout(callback, delay);
+            };
+        }
+
+        function search() {
+            document.getElementById("result").innerText = "Searching...";
+        }
+
+        const debounceSearch = debounce(search, 1000);
+
+        document.getElementById("search")
+            .addEventListener("input", debounceSearch);
+    </script>
+
+</body>
+</html>

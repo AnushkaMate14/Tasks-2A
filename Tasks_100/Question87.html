@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Scroll</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.product {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 6px #ddd;
+}
+
+.product img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+}
+
+#loader,
+#message {
+    text-align: center;
+    padding: 15px;
+}
+
+    </style>
+</head>
+<body>
+
+    <h1>Products</h1>
+
+    <div id="products"></div>
+
+    <p id="loader">Loading products...</p>
+    <p id="message"></p>
+
+    <script defer>
+let products = document.getElementById("products");
+let loader = document.getElementById("loader");
+let message = document.getElementById("message");
+
+let limit = 30;
+let skip = 0;
+let isLoading = false;
+let totalProducts = 0;
+
+async function loadProducts() {
+
+    if (isLoading || (totalProducts > 0 && skip >= totalProducts)) {
+        return;
+    }
+
+    isLoading = true;
+    loader.style.display = "block";
+    message.innerText = "";
+
+    try {
+        let response = await fetch(
+            `https://dummyjson.com/products?limit=${limit}&skip=${skip}`
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to load products");
+        }
+
+        let data = await response.json();
+
+        totalProducts = data.total;
+
+        data.products.forEach(function(product) {
+            let div = document.createElement("div");
+            div.className = "product";
+
+            div.innerHTML = `
+                <img src="${product.thumbnail}" alt="${product.title}">
+                <h3>${product.title}</h3>
+                <p>Price: $${product.price}</p>
+                <p>${product.category}</p>
+            `;
+
+            products.appendChild(div);
+        });
+
+        skip += data.products.length;
+
+        if (skip >= totalProducts) {
+            message.innerText = "All products loaded!";
+        }
+
+    } catch (error) {
+        message.innerText = "Unable to load products. Scroll or try again.";
+        console.log(error);
+
+    } finally {
+    isLoading = false;
+    loader.style.display = "none";
+
+}
+}
+
+window.addEventListener("scroll", function() {
+
+    if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 100
+    ) {
+        loadProducts();
+    }
+});
+
+loadProducts();
+</script>
+</body>
+</html>

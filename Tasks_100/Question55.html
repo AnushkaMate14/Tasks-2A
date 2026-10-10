@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Search</title>
+</head>
+<body>
+
+    <h2>Search Products</h2>
+
+    <input type="text" id="search" placeholder="Search...">
+
+    <ul id="products">
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Orange</li>
+        <li>Mango</li>
+        <li>Grapes</li>
+    </ul>
+
+    <script>
+
+        let search = document.getElementById("search");
+        let products = document.querySelectorAll("#products li");
+
+        search.addEventListener("input", function() {
+
+            let value = search.value.toLowerCase();
+
+            products.forEach(function(product) {
+
+                if (product.innerText.toLowerCase().includes(value)) {
+                    product.style.display = "";
+                } else {
+                    product.style.display = "none";
+                }
+
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>

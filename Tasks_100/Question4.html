@@ -1,0 +1,150 @@
+<!-- 4. Accessibility Create a responsive navigation bar with proper landmark roles. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accessible Navigation Bar</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+header{
+    background:#0f4c81;
+}
+
+nav{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:15px 40px;
+
+}
+
+.logo{
+
+    color:white;
+    font-size:24px;
+    font-weight:bold;
+
+}
+
+nav ul{
+
+    list-style:none;
+    display:flex;
+    gap:25px;
+
+}
+
+nav ul li a{
+
+    color:white;
+    text-decoration:none;
+    font-size:18px;
+
+}
+
+nav ul li a:hover{
+
+    color:yellow;
+
+}
+
+footer{
+    text-align:center;
+    margin-top:50px;
+    padding:20px;
+    background:#0f4c81;
+    color:white;}
+    
+@media(max-width:768px){
+
+nav{
+
+    flex-direction:column;
+    align-items:flex-start;
+
+}
+
+nav ul{
+
+    flex-direction:column;
+    width:100%;
+    margin-top:15px;
+
+}
+
+nav ul li{
+
+    padding:10px 0;
+
+}
+
+}
+
+
+</style>
+
+</head>
+
+<body>
+
+<header role="banner">
+
+<nav role="navigation" aria-label="Main Navigation">
+
+<div class="logo">
+Student Portal
+</div>
+
+<ul>
+
+<li><a href="#">Home</a></li>
+
+<li><a href="#">About</a></li>
+
+<li><a href="#">Courses</a></li>
+
+<li><a href="#">Gallery</a></li>
+
+<li><a href="#">Contact</a></li>
+
+</ul>
+
+</nav>
+
+</header>
+
+<main role="main">
+
+<h2 style="text-align:center; margin-top:50px;">
+Welcome to Student Portal
+</h2>
+
+<p style="text-align:center;">
+This is the main content area.
+</p>
+
+</main>
+
+<footer role="contentinfo">
+
+© 2026 Student Portal
+
+</footer>
+
+</body>
+</html>

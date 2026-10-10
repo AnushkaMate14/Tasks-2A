@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Information App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            padding: 25px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #263b50;
+        }
+
+        .search-box {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        input {
+            width: 280px;
+            max-width: 65%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            padding: 12px 18px;
+            background: #0984e3;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        #country {
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        .country-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px #ddd;
+            text-align: center;
+        }
+
+        .country-card img {
+            width: 180px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .country-card p {
+            text-align: left;
+            overflow-wrap: anywhere;
+        }
+
+        #loader,
+        #message {
+            text-align: center;
+        }
+
+        #loader {
+            display: none;
+        }
+
+        #message {
+            color: #d63031;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Country Information</h1>
+
+    <div class="search-box">
+        <input type="text" id="countryInput" placeholder="Enter country name">
+        <button id="searchBtn">Search</button>
+    </div>
+
+    <p id="loader">Loading...</p>
+    <p id="message"></p>
+
+    <div id="country"></div>
+
+    <script>
+        let countryInput = document.getElementById("countryInput");
+        let searchBtn = document.getElementById("searchBtn");
+        let country = document.getElementById("country");
+        let loader = document.getElementById("loader");
+        let message = document.getElementById("message");
+
+        searchBtn.addEventListener("click", searchCountry);
+
+        countryInput.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                searchCountry();
+            }
+        });
+        async function searchCountry() {
+            let name = countryInput.value.trim();
+
+            if (name === "") {
+                message.innerText = "Please enter a country name.";
+                country.innerHTML = "";
+                return;
+            }
+
+            loader.style.display = "block";
+            message.innerText = "";
+            country.innerHTML = "";
+            searchBtn.disabled = true;
+
+            try {
+                let response = await fetch(
+                    `https://api.restcountries.com/countries/v5/name?q=${encodeURIComponent(name)}`,
+                    {
+                        headers: {
+                            "Authorization": "Bearer rc_live_d5aad834e3f44d4aa13746b50d4b6fe3"
+                        }
+                    }
+                );
+
+                let result = await response.json();
+
+                if (!response.ok || result.errors) {
+                    throw new Error(
+                        result.errors?.[0]?.message || "Unable to fetch country."
+                    );
+                }
+
+                let countries = result.data.objects;
+
+                let info = countries.find(
+                    c => c.names.common.toLowerCase() === name.toLowerCase()
+                );
+
+                if (!info) {
+                    message.innerText = "Country not found.";
+                    return;
+                }
+
+                let capital = info.capitals?.map(c => c.name).join(", ") || "N/A";
+
+                let currencies = Array.isArray(info.currencies)
+                    ? info.currencies.map(c => `${c.name} (${c.symbol || ""})`).join(", ")
+                    : Object.values(info.currencies || {})
+                        .map(c => `${c.name} (${c.symbol || ""})`).join(", ") || "N/A";
+
+                let languages = Array.isArray(info.languages)
+                    ? info.languages.map(l => l.name).join(", ")
+                    : Object.values(info.languages || {}).join(", ") || "N/A";
+
+                country.innerHTML = `
+            <div class="country-card">
+                <h2>${info.flag?.emoji || ""} ${info.names.common}</h2>
+
+                <img
+                    src="${info.flag?.url_png || ""}"
+                    alt="Flag of ${info.names.common}"
+                    onerror="this.style.display='none'"
+                >
+
+                <p><strong>Official Name:</strong> ${info.names.official || "N/A"}</p>
+                <p><strong>Capital:</strong> ${capital}</p>
+                <p><strong>Region:</strong> ${info.region || "N/A"}</p>
+                <p><strong>Population:</strong> ${info.population?.toLocaleString() || "N/A"}</p>
+                <p><strong>Currency:</strong> ${currencies || "N/A"}</p>
+                <p><strong>Languages:</strong> ${languages || "N/A"}</p>
+            </div>
+        `;
+
+            } catch (err) {
+                message.innerText = "Error: " + err.message;
+                console.log(err);
+            } finally {
+                loader.style.display = "none";
+                searchBtn.disabled = false;
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTML + CSS Foundations (1-10)</title>
+  <link rel="icon" type="image/png" href="Example/HTML+CSS/jewelry.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="Task1.css" />
+</head>
+<body>
+  <header class="site-header fade-in">
+    <h1>HTML + CSS Foundations (1-10)</h1>
+    <p>A single webpage covering core HTML and CSS building blocks.</p>
+  </header>
+
+  <nav class="navbar">
+    <a href="#basics">Basics</a>
+    <a href="#forms">Forms</a>
+    <a href="#semantic">Semantic</a>
+    <a href="#media">Media</a>
+    <a href="#components">Components</a>
+    <a href="#layouts">Layouts</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <main class="page-grid">
+    <aside class="sidebar slide-in">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#basics">Question 1</a></li>
+        <li><a href="#forms">Question 2</a></li>
+        <li><a href="#semantic">Question 3</a></li>
+        <li><a href="#media">Question 4</a></li>
+        <li><a href="#styling">Question 5</a></li>
+        <li><a href="#components">Question 6</a></li>
+        <li><a href="#layouts">Question 7</a></li>
+        <li><a href="#sticky">Question 8</a></li>
+        <li><a href="#contact">Question 9</a></li>
+        <li><a href="#animations">Question 10</a></li>
+      </ul>
+    </aside>
+
+    <section class="content">
+      <section id="basics" class="card fade-in">
+        <h2>1. Basic Webpage Elements</h2>
+        <h3>Headings and Paragraphs</h3>
+        <p>
+          This section demonstrates headings, text, images, links, lists, and tables.
+          You can visit the <a href="#contact">contact section</a> (internal link)
+          or <a href="https://developer.mozilla.org" target="_blank" rel="noopener">MDN Web Docs</a>
+          (external link).
+        </p>
+
+        <img src="Example/HTML+CSS/hero.jpg" alt="Decorative jewelry display" class="hero-image" />
+
+        <div class="basic-grid">
+          <div>
+            <h4>Ordered List</h4>
+            <ol>
+              <li>Learn structure</li>
+              <li>Apply styles</li>
+              <li>Build layouts</li>
+            </ol>
+          </div>
+          <div>
+            <h4>Unordered List</h4>
+            <ul>
+              <li>HTML tags</li>
+              <li>CSS selectors</li>
+              <li>Responsive design</li>
+            </ul>
+          </div>
+        </div>
+
+        <h4>Simple Table</h4>
+        <table class="striped-table">
+          <thead>
+            <tr>
+              <th>Topic</th>
+              <th>Level</th>
+              <th>Practice</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>HTML Basics</td>
+              <td>Beginner</td>
+              <td>Daily</td>
+            </tr>
+            <tr>
+              <td>CSS Styling</td>
+              <td>Beginner</td>
+              <td>Daily</td>
+            </tr>
+            <tr>
+              <td>Layouts</td>
+              <td>Intermediate</td>
+              <td>3x/week</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="forms" class="card fade-in">
+        <h2>2. Forms (Login + Registration)</h2>
+        <div class="form-wrap two-col">
+          <form class="form-box" action="#">
+            <h3>Login</h3>
+            <label for="login-email">Email</label>
+            <input id="login-email" type="email" placeholder="you@example.com" required />
+
+            <label for="login-password">Password</label>
+            <input id="login-password" type="password" placeholder="Enter password" required />
+
+            <button type="submit" class="btn">Login</button>
+          </form>
+
+          <form class="form-box" action="#">
+            <h3>Registration</h3>
+            <label for="name">Full Name</label>
+            <input id="name" type="text" placeholder="Your name" required />
+
+            <label>Gender</label>
+            <div class="inline-inputs">
+              <label><input type="radio" name="gender" /> Male</label>
+              <label><input type="radio" name="gender" /> Female</label>
+              <label><input type="radio" name="gender" /> Other</label>
+            </div>
+
+            <label>Skills</label>
+            <div class="inline-inputs">
+              <label><input type="checkbox" /> HTML</label>
+              <label><input type="checkbox" /> CSS</label>
+              <label><input type="checkbox" /> Responsive Design</label>
+            </div>
+
+            <button type="submit" class="btn">Register</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="semantic" class="card fade-in">
+        <h2>3. Semantic Structure</h2>
+        <p>
+          This page uses semantic tags: <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>,
+          <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;aside&gt;</code>, and
+          <code>&lt;footer&gt;</code> for meaningful structure.
+        </p>
+      </section>
+
+      <section id="media" class="card fade-in">
+        <h2>4. Media Embeds</h2>
+        <div class="media-grid">
+          <div>
+            <h4>Audio</h4>
+            <audio controls>
+              <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg" />
+              Your browser does not support audio.
+            </audio>
+          </div>
+          <div>
+            <h4>Video</h4>
+            <video controls width="100%">
+              <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+              Your browser does not support video.
+            </video>
+          </div>
+          <div>
+            <h4>YouTube</h4>
+            <iframe
+              src="https://www.youtube.com/embed/UB1O30fR-EE"
+              title="YouTube video"
+              loading="lazy"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div>
+            <h4>Google Map</h4>
+            <iframe
+              src="https://maps.google.com/maps?q=Delhi%20India&t=&z=11&ie=UTF8&iwloc=&output=embed"
+              title="Map embed"
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section id="styling" class="card fade-in">
+        <h2>5. External CSS + Text Styling + Hover</h2>
+        <p class="styled-text">
+          This page uses an external stylesheet, custom fonts from Google Fonts, color themes,
+          and hover effects on links, buttons, cards, and navbar items.
+        </p>
+      </section>
+
+      <section id="components" class="card fade-in">
+        <h2>6. UI Components</h2>
+        <div class="ui-cards">
+          <article class="mini-card">
+            <img src="Example/HTML+CSS/bracelet.jpg" alt="Bracelet" />
+            <h4>Product Card</h4>
+            <p>Simple card with image, text, and CTA button.</p>
+            <button class="btn">View Details</button>
+          </article>
+          <article class="mini-card">
+            <img src="Example/HTML+CSS/jewelry.png" alt="Jewelry" />
+            <h4>Action Card</h4>
+            <p>Reusable UI block for listings and highlights.</p>
+            <button class="btn">Buy Now</button>
+          </article>
+        </div>
+      </section>
+
+      <section id="layouts" class="card fade-in">
+        <h2>7. Layouts: Flexbox + Grid</h2>
+        <h3>Flexbox Gallery</h3>
+        <div class="gallery">
+          <img src="Example/HTML+CSS/hero.jpg" alt="Gallery 1" />
+          <img src="Example/HTML+CSS/bracelet.jpg" alt="Gallery 2" />
+          <img src="Example/HTML+CSS/jewelry.png" alt="Gallery 3" />
+          <img src="Example/HTML+CSS/hero.jpg" alt="Gallery 4" />
+        </div>
+
+        <h3>Two-Column CSS Grid</h3>
+        <div class="two-column-grid">
+          <div class="grid-item">Column 1: Content block for articles or descriptions.</div>
+          <div class="grid-item">Column 2: Secondary block for related info or notes.</div>
+        </div>
+      </section>
+
+      <section id="sticky" class="card fade-in">
+        <h2>8. Sticky Elements</h2>
+        <p>
+          The top navigation bar and left sidebar are sticky. Scroll the page to see them stay in position.
+        </p>
+      </section>
+
+      <section id="contact" class="card fade-in">
+        <h2>9. Responsive Contact / Login Form</h2>
+        <form class="contact-form" action="#">
+          <label for="cname">Name</label>
+          <input id="cname" type="text" placeholder="Enter your name" required />
+
+          <label for="cemail">Email</label>
+          <input id="cemail" type="email" placeholder="Enter your email" required />
+
+          <label for="cmsg">Message</label>
+          <textarea id="cmsg" rows="4" placeholder="Write your message..."></textarea>
+
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+      </section>
+
+      <section id="animations" class="card fade-in">
+        <h2>10. CSS Animations (@keyframes)</h2>
+        <p>
+          Fade and slide animations are applied to major blocks and sidebar using
+          <code>@keyframes fadeIn</code> and <code>@keyframes slideIn</code>.
+        </p>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Built with only HTML and CSS for foundation practice tasks 1-10.</p>
+  </footer>
+</body>
+</html>

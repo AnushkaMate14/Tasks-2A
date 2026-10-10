@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Array Methods</title>
+  </head>
+  <body>
+    <script>
+      const marks = [45, 80, 65, 90, 35];
+      //map() har element ko change/modify
+      const updatedMarks = marks.map((mark) => mark + 5);
+      console.log("Updated Marks:", updatedMarks);
+      //filter() condition ke according elements select
+      const passed = marks.filter((mark) => mark >= 50);
+      console.log("Passed Marks:", passed);
+      //reduce() sabko combine karke ek value
+      const total = marks.reduce((sum, mark) => sum + mark, 0);
+      console.log("Total Marks:", total);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Accordion</title>
+
+    <style>
+        .answer {
+            display: none;
+            padding: 10px;
+        }
+
+        .question {
+            width: 300px;
+            padding: 12px;
+            cursor: pointer;
+            background: #eee;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>FAQ Accordion</h2>
+
+    <button class="question">What is HTML?</button>
+    <div class="answer">
+        HTML is used to create the structure of a webpage.
+    </div>
+
+    <button class="question">What is CSS?</button>
+    <div class="answer">
+        CSS is used to style a webpage.
+    </div>
+
+    <button class="question">What is JavaScript?</button>
+    <div class="answer">
+        JavaScript is used to add functionality and interaction.
+    </div>
+
+    <script>
+
+        let questions = document.querySelectorAll(".question");
+
+        questions.forEach(function(question) {
+
+            question.addEventListener("click", function() {
+
+                let answer = question.nextElementSibling;
+
+                if (answer.style.display === "block") {
+                    answer.style.display = "none";
+                } else {
+                    answer.style.display = "block";
+                }
+
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>

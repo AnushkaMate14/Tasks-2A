@@ -1,0 +1,116 @@
+<!-- 11.CSS Variables Create a website color theme system using :root CSS variables. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Variables</title>
+
+    <style>
+
+        :root {
+            --primary-color: #ff00bf;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        nav {
+            background-color: var(--primary-color);
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        .container {
+            text-align: center;
+            padding: 40px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            color: white;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .success {
+            background-color: var(--success-color);
+        }
+
+        .danger {
+            background-color: var(--danger-color);
+        }
+
+        .warning {
+            background-color: var(--warning-color);
+            color: black;
+        }
+
+        .info {
+            background-color: var(--info-color);
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav>
+
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+
+    </nav>
+
+
+    <div class="container">
+
+        <h1>Welcome to My Website</h1>
+
+        <p>
+            This website uses CSS variables for its color theme.
+        </p>
+
+        <button class="success">Success</button>
+
+        <button class="danger">Danger</button>
+
+        <button class="warning">Warning</button>
+
+        <button class="info">Info</button>
+
+    </div>
+
+</body>
+
+</html>

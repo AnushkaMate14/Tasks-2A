@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Number Sorting</title>
+</head>
+<body>
+
+    <h2>Number Sorting</h2>
+
+    <input type="text" id="numbers" placeholder="Enter numbers">
+
+    <button onclick="sortNumbers()">Sort</button>
+
+    <p id="result"></p>
+
+    <script>
+        function sortNumbers() {
+
+            let input = document.getElementById("numbers").value;
+
+            let numbers = input.split(",").map(Number);
+
+            numbers.sort(function(a, b) {
+                return a - b;
+            });
+
+            document.getElementById("result").innerText =
+                "Sorted Numbers: " + numbers;
+        }
+    </script>
+
+</body>
+</html>

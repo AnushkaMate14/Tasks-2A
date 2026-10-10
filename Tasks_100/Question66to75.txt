@@ -1,0 +1,388 @@
+*****66. Git Basics – Initialize Git Repository and Commit Code
+Step 1: Apne project folder mein jao
+cd Brand-Store-Website
+Step 2: Git initialize karo
+git init
+
+Isse project ke andar .git folder banega.
+
+Step 3: Files check karo
+git status
+Step 4: Files staging mein add karo
+git add .
+Step 5: First commit
+git commit -m "Initial commit"
+Main concept
+git init
+   ↓
+git add .
+   ↓
+git commit
+
+Task complete: repository initialize + code commit.
+
+*****67. Git Branching – Create and Switch Branches
+
+Pehle current branch check:
+
+git branch
+
+New branch create karo:
+
+git branch feature-navbar
+
+Branch par switch karo:
+
+git switch feature-navbar
+
+Ya dono ek saath:
+
+git switch -c feature-navbar
+
+Ab check:
+
+git branch
+
+Output kuch aisa:
+
+* feature-navbar
+  main
+
+* ka matlab current branch hai.
+
+Practice
+
+feature-navbar branch mein koi small HTML change karo.
+
+Then:
+
+git add .
+git commit -m "Update navbar"
+*****68. Git Merge – Resolve Merge Conflicts Manually
+
+Ye thoda important hai.
+
+Hum jaan-bujhkar conflict create karenge.
+
+Step 1
+
+Main branch par jao:
+
+git switch main
+
+Ek file mein change karo:
+
+<h1>Welcome to Baby Store</h1>
+
+Commit:
+
+git add .
+git commit -m "Update heading on main"
+Step 2
+
+Ab feature branch par jao:
+
+git switch feature-navbar
+
+Same line ko different text se change karo:
+
+<h1>Welcome to Our Baby Store</h1>
+
+Commit:
+
+git add .
+git commit -m "Update heading on feature branch"
+Step 3: Merge
+
+Main branch par:
+
+git switch main
+
+Then:
+
+git merge feature-navbar
+
+Ab conflict aa sakta hai.
+
+File ke andar kuch aisa dikhega:
+
+<<<<<<< HEAD
+<h1>Welcome to Baby Store</h1>
+=======
+<h1>Welcome to Our Baby Store</h1>
+>>>>>>> feature-navbar
+Manually decide karo
+
+Example:
+
+<h1>Welcome to Our Baby Store</h1>
+
+Conflict markers:
+
+<<<<<<<
+=======
+>>>>>>>
+
+remove karne hain.
+
+Then:
+
+git add .
+git commit -m "Resolve merge conflict"
+*****69. Git Docs – Professional README.md
+
+Project ke root mein:
+
+README.md
+
+banao.
+
+Tumhare Baby Store project ke liye basic professional README:
+
+# Baby Store Website
+
+A responsive baby store website built using HTML, CSS, Bootstrap and JavaScript.
+
+## Features
+
+- Responsive design
+- Product sections
+- Category sections
+- Best Seller section
+- New Arrivals section
+- Bootstrap-based layout
+
+## Technologies Used
+
+- HTML5
+- CSS3
+- Bootstrap 5
+- JavaScript
+
+## Project Structure
+
+```text
+Baby-Store/
+│
+├── Index.html
+├── Shop.html
+├── CSS/
+├── Images/
+└── README.md
+Live Demo
+
+https://anushkamate14.github.io/Brand-Store-Website/
+
+Author
+
+Anushka Mate
+
+
+Then:
+
+```bash
+git add README.md
+git commit -m "Add professional README"
+git push
+*****70. Git Ignore – Configure .gitignore
+
+Project root mein file banao:
+
+.gitignore
+
+Example:
+
+.vscode/
+.idea/
+node_modules/
+*.log
+.env
+.DS_Store
+Meaning
+.vscode/       → VS Code settings ignore
+.idea/         → IntelliJ settings ignore
+node_modules/  → dependencies ignore
+*.log          → log files ignore
+.env           → sensitive environment file ignore
+
+Check:
+
+git status
+
+Ignored files normally status mein nahi dikhenge.
+
+*****71. GitHub PR – Create Pull Request
+
+Ye GitHub website par karna hai.
+
+Step 1
+
+Feature branch banao:
+
+git switch -c feature-footer
+
+Footer mein koi small change karo.
+
+Step 2
+
+Commit:
+
+git add .
+git commit -m "Update footer"
+Step 3
+
+GitHub par branch push:
+
+git push -u origin feature-footer
+Step 4
+
+GitHub repository open karo.
+
+Usually GitHub Compare & pull request option show karega.
+
+Click:
+
+Compare & pull request
+
+Then:
+
+base: main
+compare: feature-footer
+
+Title:
+
+Update footer section
+
+Description:
+
+Updated footer layout and links.
+
+Then:
+
+Create pull request
+
+*****72. Code Review – Review Code and Add Comments
+
+PR open hone ke baad GitHub mein:
+
+Files changed
+
+tab open karo.
+
+Kisi line ke side mein + par click karo.
+
+Comment likho:
+
+Consider adding a meaningful alt attribute to this image.
+
+Then:
+
+Add comment
+
+Ya multiple comments ke baad:
+
+Submit review
+
+Is task ka purpose hai kisi aur developer ke code ko review karna.
+
+*****73. GitHub Projects – Manage Tasks
+
+GitHub repository open karo.
+
+Projects → New Project
+
+Board type:
+
+Board
+
+Columns bana sakti ho:
+
+Todo
+In Progress
+Done
+
+Example tasks:
+
+Todo
+Create navbar
+Create hero section
+Create product cards
+In Progress
+Create shop page
+Done
+Create homepage
+Create footer
+
+Task ko drag karke columns ke beech move kar sakti ho.
+
+Ye basically Kanban task board hai.
+
+*****74. Versioning – Create and Manage Git Tags
+
+Suppose tumhara project ka first stable version ready hai.
+
+Current commits check:
+
+git log --oneline
+
+Tag create:
+
+git tag v1.0.0
+
+Tags check:
+
+git tag
+
+GitHub par tag push:
+
+git push origin v1.0.0
+New version
+
+Kuch major update ke baad:
+
+git tag v1.1.0
+git push origin v1.1.0
+
+Example:
+
+v1.0.0 → Initial stable version
+v1.1.0 → New features
+v2.0.0 → Major changes
+*****75. Recovery – git reset and git revert
+
+Ye important but carefully practice karna.
+
+git revert
+
+Suppose commits:
+
+A → B → C
+
+C mein mistake hai.
+
+git revert C
+
+Git ek new commit banayega jo C ke changes ko undo karega.
+
+History:
+
+A → B → C → C-revert
+
+Ye shared/public branches ke liye generally safer approach hai because history preserve hoti hai.
+
+git reset
+
+Practice ke liye:
+
+git reset --soft HEAD~1
+
+Last commit remove hota hai, but changes staging mein rehte hain.
+
+Another:
+
+git reset --mixed HEAD~1
+
+Last commit remove hota hai aur changes working directory mein rehte hain.
+
+Hard reset
+git reset --hard HEAD~1

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart</title>
+
+    <style>
+        .product, .cart {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin: 10px;
+            width: 300px;
+        }
+
+        button {
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Products</h2>
+
+    <div class="product">
+        <h3>T-Shirt</h3>
+        <p>Price: ₹500</p>
+        <button onclick="addToCart()">Add to Cart</button>
+    </div>
+
+    <div class="cart">
+        <h2>Cart</h2>
+
+        <p>T-Shirt</p>
+
+        <button onclick="decrease()">−</button>
+        <span id="quantity">0</span>
+        <button onclick="increase()">+</button>
+
+        <p>Total: ₹<span id="total">0</span></p>
+    </div>
+
+    <script>
+
+        let quantity = 0;
+        let price = 500;
+
+        function addToCart() {
+            quantity++;
+            updateCart();
+        }
+
+        function increase() {
+            quantity++;
+            updateCart();
+        }
+
+        function decrease() {
+            if (quantity > 0) {
+                quantity--;
+                updateCart();
+            }
+        }
+
+        function updateCart() {
+            document.getElementById("quantity").innerText = quantity;
+            document.getElementById("total").innerText = quantity * price;
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!-- 5. Accessibility Build an image gallery of nature photos with meaningful alt text. -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Nature Gallery</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 32px;
+        font-family: Arial, sans-serif;
+      }
+
+      .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+
+      .image-card {
+        flex: 0 1 260px;
+        width: 260px;
+        max-width: 100%;
+      }
+
+      .image-card img {
+        display: block;
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+      }
+
+      .image-card p {
+        margin: 8px 0 0;
+        text-align: center;
+      }
+
+      @media (max-width: 400px) {
+        body {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Nature Photo Gallery</h1>
+
+    <div class="gallery">
+      <div class="image-card">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Everest_North_Face_toward_Base_Camp_Tibet_Luca_Galuzzi_2006.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original"
+          alt="Snow-covered mountains under a clear blue sky"
+        />
+
+        <p>Mountains</p>
+      </div>
+
+      <div class="image-card">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSveY2qEz6GoBLyCV47CpnQ9xjYH0VctqpA_4fE52u_hPIeDYZx9X2ThKA&s=10"
+          alt="Dense green forest with tall trees"
+        />
+
+        <p>Forest</p>
+      </div>
+
+      <div class="image-card">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0w4svTmkeEl4neT18kLDrRUSmumVdjygRELvgU2lDD42NHgJfcq9zckTf&s=10"
+          alt="Calm blue ocean with gentle waves"
+        />
+
+        <p>Ocean</p>
+      </div>
+
+      <div class="image-card">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmojsjlNybEFbfDl5us_rR0sYjE4i_qwahcg0gkbLpyGarb5HHdkZgjXNy&s=10"
+          alt="Colorful flowers blooming in a garden"
+        />
+
+        <p>Flowers</p>
+      </div>
+
+      <div class="image-card">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLgiQSw_H6oHrAdr4EX-HqdY547WCzLEtC4w51RdG5pW8u8bhWZWYXzIZi&s=10"
+          alt="Golden sunset over the hills"
+        />
+
+        <p>Sunset</p>
+      </div>
+
+      <div class="image-card">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0w4svTmkeEl4neT18kLDrRUSmumVdjygRELvgU2lDD42NHgJfcq9zckTf&s=10"
+          alt="Beautiful waterfall surrounded by green trees"
+        />
+
+        <p>Waterfall</p>
+      </div>
+    </div>
+  </body>
+</html>

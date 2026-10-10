@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dark Mode</title>
+
+    <style>
+        :root {
+            --background-color: white;
+            --text-color: black;
+            --card-color: lightgray;
+        }
+        .dark-mode {
+            --background-color: #222;
+            --text-color: white;
+            --card-color: #333;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .card {
+            background-color: var(--card-color);
+            padding: 30px;
+            margin: 30px auto;
+            width: 300px;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>My Website</h1>
+
+    <p>This is my simple webpage.</p>
+
+    <div class="card">
+        <h2>Welcome!</h2>
+        <p>This card also changes in dark mode.</p>
+    </div>
+
+    <button onclick="toggleDarkMode()">
+        Dark Mode
+    </button>
+
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+
+            if (document.body.classList.contains("dark-mode")) {
+                document.querySelector("button").innerText = "Light Mode";
+            } else {
+                document.querySelector("button").innerText = "Dark Mode";
+            }
+        }
+    </script>
+
+</body>
+</html>

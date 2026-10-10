@@ -1,0 +1,138 @@
+<!-- 15. CSS Grid Create a dashboard layout using CSS Grid. -->
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Grid Dashboard</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background-color: #0f4c81;
+            color: white;
+            padding: 25px;
+        }
+
+        .sidebar h2 {
+            margin-bottom: 25px;
+        }
+
+        .sidebar p {
+            margin: 15px 0;
+        }
+
+        .main {
+            padding: 30px;
+        }
+
+        .main h1 {
+            margin-bottom: 25px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h2 {
+            margin-bottom: 10px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <aside class="sidebar">
+
+            <h2>Dashboard</h2>
+
+            <p>Home</p>
+            <p>Users</p>
+            <p>Orders</p>
+            <p>Settings</p>
+
+        </aside>
+
+        <main class="main">
+
+            <h1>Dashboard Overview</h1>
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <h2>Users</h2>
+
+                    <p>1,250</p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h2>Orders</h2>
+
+                    <p>850</p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h2>Revenue</h2>
+
+                    <p>₹75,000</p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h2>Products</h2>
+
+                    <p>320</p>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

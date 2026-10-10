@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Table</title>
+</head>
+
+<body>
+
+    <h2>Student Table</h2>
+
+    <input type="text" id="name" placeholder="Enter name">
+    <button onclick="addRow()">Add Student</button>
+
+    <br><br>
+
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody id="studentTable">
+        </tbody>
+    </table>
+
+    <script>
+
+        function addRow() {
+
+            let name = document.getElementById("name").value;
+
+            if (name === "") {
+                return;
+            }
+
+            let row = document.createElement("tr");
+
+            let nameCell = document.createElement("td");
+            nameCell.innerText = name;
+
+            let actionCell = document.createElement("td");
+
+            let deleteButton = document.createElement("button");
+            deleteButton.innerText = "Delete";
+
+            deleteButton.onclick = function () {
+                row.remove();
+            };
+
+            actionCell.appendChild(deleteButton);
+
+            row.appendChild(nameCell);
+            row.appendChild(actionCell);
+
+            document.getElementById("studentTable").appendChild(row);
+
+            document.getElementById("name").value = "";
+        }
+
+    </script>
+
+</body>
+</html>

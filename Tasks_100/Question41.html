@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OTP Timer</title>
+</head>
+<body>
+
+    <h2>OTP Verification</h2>
+
+    <p id="timer">Resend OTP in 10 seconds</p>
+
+    <button id="resend" disabled>Resend OTP</button>
+
+    <script>
+        setTimeout(function () {
+            document.getElementById("timer").innerText = "You can resend OTP now";
+
+            document.getElementById("resend").disabled = false;
+        }, 10000);
+    </script>
+
+</body>
+</html>

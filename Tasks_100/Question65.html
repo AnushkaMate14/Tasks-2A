@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Toast Notification</title>
+
+    <style>
+        #toast {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Toast Notification</h2>
+
+    <button onclick="showToast()">Show Notification</button>
+
+    <div id="toast">Notification sent successfully!</div>
+
+    <script>
+
+        function showToast() {
+
+            let toast = document.getElementById("toast");
+
+            toast.style.display = "block";
+
+            setTimeout(function() {
+                toast.style.display = "none";
+            }, 3000);
+        }
+
+    </script>
+
+</body>
+</html>

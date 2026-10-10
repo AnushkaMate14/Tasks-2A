@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Product Listing App</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Product Listing</h1>
+
+    <!-- Filter and Sort -->
+    <div class="controls">
+
+        <select id="categoryFilter">
+            <option value="all">All Categories</option>
+        </select>
+
+        <select id="sortPrice">
+            <option value="default">Sort By Price</option>
+            <option value="low">Low to High</option>
+            <option value="high">High to Low</option>
+        </select>
+
+    </div>
+
+    <!-- Products -->
+    <div id="products"></div>
+
+    <!-- Product Details Modal -->
+<div id="modal">
+
+    <div class="modal-content">
+
+        <button id="closeModal">X</button>
+
+        <h2 id="modalName"></h2>
+
+        <p id="modalCategory"></p>
+
+        <p id="modalPrice"></p>
+
+        <p id="modalDescription"></p>
+
+    </div>
+
+</div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

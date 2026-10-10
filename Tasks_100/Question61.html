@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Custom Dropdown</title>
+
+    <style>
+        .dropdown {
+            width: 200px;
+        }
+
+        #menu {
+            display: none;
+            border: 1px solid #ccc;
+        }
+
+        #menu div {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        #menu div:hover {
+            background: #eee;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Custom Dropdown</h2>
+
+    <div class="dropdown">
+
+        <button id="dropdownBtn">Select Option ▼</button>
+
+        <div id="menu">
+            <div>HTML</div>
+            <div>CSS</div>
+            <div>JavaScript</div>
+            <div>Bootstrap</div>
+        </div>
+
+    </div>
+
+    <script>
+
+        let button = document.getElementById("dropdownBtn");
+        let menu = document.getElementById("menu");
+
+        button.addEventListener("click", function() {
+
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "block";
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>

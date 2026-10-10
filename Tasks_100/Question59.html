@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Preview</title>
+
+    <style>
+        #preview {
+            width: 200px;
+            margin-top: 15px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Image Preview</h2>
+
+    <input type="file" id="imageInput" accept="image/*">
+
+    <br>
+
+    <img id="preview" alt="Image Preview">
+
+    <script>
+
+        let imageInput = document.getElementById("imageInput");
+        let preview = document.getElementById("preview");
+
+        imageInput.addEventListener("change", function() {
+
+            let file = imageInput.files[0];
+
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+                preview.style.display = "block";
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>

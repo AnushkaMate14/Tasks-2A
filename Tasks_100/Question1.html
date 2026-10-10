@@ -1,0 +1,130 @@
+<!-- Semantic HTML5 - Convert a non-semantic HTML page into semantic HTML using
+header, main, section, footer for a simple portfolio layout. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anushka Mate | Portfolio</title>
+    <meta name="description" content="Simple portfolio website of Anushka Mate.">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f7f9fc;
+            color: #222;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+        header {
+            background: #1f4e79;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+        section {
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .hero {
+            background: linear-gradient(135deg, #eaf4ff, #fdfdfd);
+        }
+        .grid {
+            display: grid;
+            gap: 15px;
+        }
+        .card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Anushka Mate</h1>
+                <p>Aspiring Software Engineer</p>
+            </div>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="home" class="hero">
+                <h2>Hi, I'm Anushka.</h2>
+                <p>I am learning full stack development technologies and enjoy building simple, useful web applications.</p>
+                <p>Thanks for visiting my portfolio.</p>
+            </section>
+
+            <section id="about">
+                <h2>About Me</h2>
+                <p>I am a motivated learner who likes solving problems with clean and efficient code.</p>
+                <ul>
+                    <li>Java</li>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>Javascript</li>
+                    <li>SQL</li>
+                    <li>Git &amp; GitHub</li>
+                </ul>
+            </section>
+
+            <section id="projects">
+                <h2>Projects</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Event Management System</h3>
+                        <p>Java project for managing event registrations.</p>
+                    </div>
+                    <div class="card">
+                        <h3>E-Commerce Website</h3>
+                        <p>A simple e-commerce website built with HTML,CSS and Javascript.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Hospital Management System</h3>
+                        <p>A beginner-friendly system for managing hospital operations.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact">
+                <h2>Contact</h2>
+                <p>Email: <a href="mailto:mateanushka44@gmail.com">mateanushka44@gmail.com</a></p>
+                <p>Phone: <a href="tel:+918357097040">+91 83570 97040</a></p>
+                <p>Location: Harda, M.P</p>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Anushka Mate</p>
+        </footer>
+    </div>
+</body>
+</html>

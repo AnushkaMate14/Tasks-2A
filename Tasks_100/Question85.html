@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Pagination</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    padding: 25px;
+    background: #f4f6f9;
+}
+
+h1 {
+    text-align: center;
+}
+
+#users {
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.user {
+    background: white;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px #ddd;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 25px;
+}
+
+button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 5px;
+    background: #0984e3;
+    color: white;
+    cursor: pointer;
+}
+
+button:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}
+
+#loader,
+#error {
+    text-align: center;
+}
+    </style>
+</head>
+<body>
+
+    <h1>User List</h1>
+
+    <div id="loader">Loading users...</div>
+    <p id="error"></p>
+
+    <div id="users"></div>
+
+    <div class="pagination">
+        <button id="prevBtn">Previous</button>
+        <span id="pageInfo">Page 1</span>
+        <button id="nextBtn">Next</button>
+    </div>
+
+    <script>
+let usersContainer = document.getElementById("users");
+let loader = document.getElementById("loader");
+let error = document.getElementById("error");
+
+let prevBtn = document.getElementById("prevBtn");
+let nextBtn = document.getElementById("nextBtn");
+let pageInfo = document.getElementById("pageInfo");
+
+let currentPage = 1;
+let limit = 5;
+let totalUsers = 0;
+
+async function fetchUsers() {
+    loader.style.display = "block";
+    usersContainer.innerHTML = "";
+    error.innerText = "";
+    prevBtn.disabled = true;
+    nextBtn.disabled = true;
+
+    let skip = (currentPage - 1) * limit;
+
+    try {
+        let response = await fetch(
+            `https://dummyjson.com/users?limit=${limit}&skip=${skip}`
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to load users");
+        }
+
+        let data = await response.json();
+
+        totalUsers = data.total;
+
+        data.users.forEach(function(user) {
+            let div = document.createElement("div");
+            div.className = "user";
+
+            div.innerHTML = `
+                <h3>${user.firstName} ${user.lastName}</h3>
+                <p>Email: ${user.email}</p>
+                <p>Age: ${user.age}</p>
+            `;
+
+            usersContainer.appendChild(div);
+        });
+
+        pageInfo.innerText =
+            `Page ${currentPage} of ${Math.ceil(totalUsers / limit)}`;
+
+        prevBtn.disabled = currentPage === 1;
+        nextBtn.disabled = skip + data.users.length >= totalUsers;
+
+    } catch (err) {
+        error.innerText = "Unable to load users. Please try again.";
+        console.log(err);
+
+    } finally {
+        loader.style.display = "none";
+    }
+}
+
+nextBtn.addEventListener("click", function() {
+    currentPage++;
+    fetchUsers();
+});
+
+prevBtn.addEventListener("click", function() {
+    if (currentPage > 1) {
+        currentPage--;
+        fetchUsers();
+    }
+});
+
+fetchUsers();
+</script>
+</body>
+</html>
