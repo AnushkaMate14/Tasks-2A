@@ -1,45 +1,275 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #e9eaf5;
+            font-family: Arial, sans-serif;
+        }
+
+        .calculator {
+            width: 320px;
+            padding: 20px;
+            background: #222431;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px #0003;
+        }
+
+        h2 {
+            color: white;
+            text-align: center;
+            font-size: 20px;
+            margin: 0 0 15px;
+        }
+
+        .display-box {
+            background: #151720;
+            border-radius: 10px;
+            padding: 10px 15px;
+            margin-bottom: 18px;
+        }
+
+        #expression {
+            height: 24px;
+            color: #aaa;
+            text-align: right;
+            font-size: 16px;
+            overflow: hidden;
+        }
+
+        #display {
+            width: 100%;
+            height: 45px;
+            padding: 0;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: white;
+            text-align: right;
+            font-size: 32px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            height: 55px;
+            border: none;
+            border-radius: 10px;
+            background: #383b4d;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #50546a;
+        }
+
+        .operator {
+            background: #55516e;
+        }
+
+        .clear {
+            background: #e66b75;
+        }
+
+        .equal {
+            background: #7965e8;
+        }
+
+        .zero {
+            grid-column: span 2;
+        }
+    </style>
 </head>
+
 <body>
 
-    <h2>Simple Calculator</h2>
+    <div class="calculator">
 
-    <input type="number" id="num1" placeholder="Enter first number">
-    <input type="number" id="num2" placeholder="Enter second number">
+        <h2>CALCULATOR</h2>
 
-    <br><br>
+        <div class="display-box">
+            <div id="expression"></div>
+            <input type="text" id="display" value="0" readonly>
+        </div>
 
-    <button onclick="calculate('+')">+</button>
-    <button onclick="calculate('-')">-</button>
-    <button onclick="calculate('*')">*</button>
-    <button onclick="calculate('/')">/</button>
+        <div class="buttons">
+            <button class="clear" onclick="clearDisplay()">AC</button>
+            <button class="operator" onclick="deleteLast()">DEL</button>
+            <button class="operator" onclick="chooseOperator('%')">%</button>
+            <button class="operator" onclick="chooseOperator('/')">÷</button>
 
-    <h3 id="result">Result: </h3>
+            <button onclick="addNumber('7')">7</button>
+            <button onclick="addNumber('8')">8</button>
+            <button onclick="addNumber('9')">9</button>
+            <button class="operator" onclick="chooseOperator('*')">×</button>
+
+            <button onclick="addNumber('4')">4</button>
+            <button onclick="addNumber('5')">5</button>
+            <button onclick="addNumber('6')">6</button>
+            <button class="operator" onclick="chooseOperator('-')">−</button>
+
+            <button onclick="addNumber('1')">1</button>
+            <button onclick="addNumber('2')">2</button>
+            <button onclick="addNumber('3')">3</button>
+            <button class="operator" onclick="chooseOperator('+')">+</button>
+
+            <button class="zero" onclick="addNumber('0')">0</button>
+            <button onclick="addDecimal()">.</button>
+            <button class="equal" onclick="calculate()">=</button>
+        </div>
+
+    </div>
 
     <script>
-        function calculate(operator) {
+        let display = document.getElementById("display");
+        let expression = document.getElementById("expression");
 
-            let num1 = Number(document.getElementById("num1").value);
-            let num2 = Number(document.getElementById("num2").value);
-            let result;
+        let firstNumber = null;
+        let operator = null;
+        let waitingForSecond = false;
 
-            if (operator === "+") {
-                result = num1 + num2;
-            } 
-            else if (operator === "-") {
-                result = num1 - num2;
-            } 
-            else if (operator === "*") {
-                result = num1 * num2;
-            } 
-            else if (operator === "/") {
-                result = num1 / num2;
+        function addNumber(number) {
+            if (display.value === "Error") {
+                clearDisplay();
             }
 
-            document.getElementById("result").innerText = "Result: " + result;
+            if (waitingForSecond) {
+                display.value = number;
+                waitingForSecond = false;
+            } else {
+                display.value =
+                    display.value === "0"
+                        ? number
+                        : display.value + number;
+            }
+
+            if (operator !== null) {
+                expression.innerText =
+                    firstNumber + " " + operatorSymbol(operator) +
+                    " " + display.value;
+            }
+        }
+
+        function addDecimal() {
+            if (display.value === "Error" || waitingForSecond) {
+                display.value = "0.";
+                waitingForSecond = false;
+            } else if (!display.value.includes(".")) {
+                display.value += ".";
+            }
+
+            if (operator !== null) {
+                expression.innerText =
+                    firstNumber + " " + operatorSymbol(operator) +
+                    " " + display.value;
+            }
+        }
+
+        function chooseOperator(selectedOperator) {
+            if (display.value === "Error") return;
+
+            if (operator !== null && !waitingForSecond) {
+                calculate();
+            }
+
+            firstNumber = Number(display.value);
+            operator = selectedOperator;
+            waitingForSecond = true;
+
+            expression.innerText =
+                firstNumber + " " + operatorSymbol(operator);
+        }
+
+        function calculate() {
+            if (operator === null || waitingForSecond) return;
+
+            let secondNumber = Number(display.value);
+            let first = firstNumber;
+            let selectedOperator = operator;
+            let result;
+
+            expression.innerText =
+                first + " " + operatorSymbol(selectedOperator) +
+                " " + secondNumber + " =";
+
+            if (selectedOperator === "+") {
+                result = first + secondNumber;
+            } else if (selectedOperator === "-") {
+                result = first - secondNumber;
+            } else if (selectedOperator === "*") {
+                result = first * secondNumber;
+            } else if (selectedOperator === "/") {
+                result = secondNumber === 0
+                    ? "Error"
+                    : first / secondNumber;
+            } else if (selectedOperator === "%") {
+                result = first % secondNumber;
+            }
+
+            if (typeof result === "number" && Number.isFinite(result)) {
+                result = Number(result.toPrecision(12));
+            }
+
+            display.value = String(result);
+            firstNumber = result === "Error" ? null : Number(result);
+            operator = null;
+            waitingForSecond = true;
+        }
+
+        function operatorSymbol(op) {
+            if (op === "*") return "×";
+            if (op === "/") return "÷";
+            return op;
+        }
+
+        function clearDisplay() {
+            display.value = "0";
+            expression.innerText = "";
+            firstNumber = null;
+            operator = null;
+            waitingForSecond = false;
+        }
+
+        function deleteLast() {
+            if (display.value === "Error") {
+                clearDisplay();
+                return;
+            }
+
+            if (waitingForSecond) {
+                display.value = "0";
+                waitingForSecond = false;
+            } else {
+                display.value = display.value.slice(0, -1) || "0";
+            }
+
+            if (operator !== null) {
+                expression.innerText =
+                    firstNumber + " " + operatorSymbol(operator) +
+                    " " + (waitingForSecond ? "" : display.value);
+            } else {
+                expression.innerText = "";
+            }
         }
     </script>
 

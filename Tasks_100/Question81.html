@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,40 +6,202 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Fetch API</title>
+    <title>Fetch API - Users</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            padding: 50px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 35px;
+        }
+
+        .header h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        #users {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .user-card {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            transition: 0.3s;
+        }
+
+        .user-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile {
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .user-card h3 {
+            color: #333;
+            font-size: 21px;
+            margin-bottom: 18px;
+        }
+
+        .user-info {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 12px;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+        }
+
+        .user-info span {
+            color: #764ba2;
+            font-weight: bold;
+        }
+
+        .user-id {
+            display: inline-block;
+            background: #f0edff;
+            color: #764ba2;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        #message {
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 850px) {
+            #users {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 550px) {
+            body {
+                padding: 30px 15px;
+            }
+
+            .header h1 {
+                font-size: 30px;
+            }
+
+            #users {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>Users</h1>
+    <div class="container">
 
-    <div id="users"></div>
+        <div class="header">
+            <h1>Our Users</h1>
+            <p>Fetching user details using JavaScript Fetch API</p>
+        </div>
+
+        <p id="message">Loading users...</p>
+
+        <div id="users"></div>
+
+    </div>
 
     <script>
         fetch("https://jsonplaceholder.typicode.com/users")
-    .then(response => response.json())
-    .then(data => {
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Failed to fetch users");
+                }
 
-        let users = document.getElementById("users");
+                return response.json();
+            })
+            .then(data => {
 
-        data.forEach(function(user) {
+                let users = document.getElementById("users");
+                let message = document.getElementById("message");
 
-            let div = document.createElement("div");
+                message.textContent = data.length + " users loaded successfully";
 
-            div.innerHTML = `
-                <h3>${user.name}</h3>
-                <p>Email: ${user.email}</p>
-                <p>City: ${user.address.city}</p>
-                <hr>
-            `;
+                data.forEach(function(user) {
 
-            users.appendChild(div);
-        });
+                    let div = document.createElement("div");
+                    div.classList.add("user-card");
 
-    })
-    .catch(error => {
-        console.log("Error:", error);
-    });
+                    div.innerHTML = `
+                        <div class="profile">
+                            ${user.name.charAt(0).toUpperCase()}
+                        </div>
+
+                        <h3>${user.name}</h3>
+
+                        <p class="user-info">
+                            <span>Email:</span> ${user.email}
+                        </p>
+
+                        <p class="user-info">
+                            <span>City:</span> ${user.address.city}
+                        </p>
+
+                        <p class="user-info">
+                            <span>Company:</span> ${user.company.name}
+                        </p>
+
+                        <span class="user-id">User ID: ${user.id}</span>
+                    `;
+
+                    users.appendChild(div);
+                });
+
+            })
+            .catch(error => {
+                document.getElementById("message").textContent =
+                    "Unable to load users. Please try again.";
+
+                console.log("Error:", error);
+            });
     </script>
 
 </body>

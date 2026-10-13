@@ -1,22 +1,162 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Palindrome Checker</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .container {
+            width: 450px;
+            max-width: 100%;
+            padding: 35px;
+            background: white;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 27px;
+            margin-bottom: 12px;
+        }
+
+        .description {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 9px;
+            outline: none;
+            font-size: 16px;
+            margin-bottom: 18px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 7px rgba(102, 126, 234, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 9px;
+            background: #667eea;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #5145cd;
+            transform: translateY(-2px);
+        }
+
+        #result {
+            display: none;
+            margin-top: 22px;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .success {
+            display: block !important;
+            color: #15803d;
+            background: #dcfce7;
+        }
+
+        .failure {
+            display: block !important;
+            color: #dc2626;
+            background: #fee2e2;
+        }
+
+        .error {
+            display: block !important;
+            color: #b45309;
+            background: #fef3c7;
+        }
+
+        @media (max-width: 450px) {
+            .container {
+                padding: 25px 20px;
+            }
+
+            h2 {
+                font-size: 23px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <h2>Palindrome Checker</h2>
+    <div class="container">
 
-    <input type="text" id="text" placeholder="Enter a word">
+        <div class="icon">🔄</div>
 
-    <button onclick="checkPalindrome()">Check</button>
+        <h2>Palindrome Checker</h2>
 
-    <p id="result"></p>
+        <p class="description">
+            Enter a word to check whether it reads the same forward and backward.
+        </p>
+
+        <input type="text" id="text" placeholder="Example: madam">
+
+        <button onclick="checkPalindrome()">Check Palindrome</button>
+
+        <p id="result"></p>
+
+    </div>
 
     <script>
         function checkPalindrome() {
 
             let text = document.getElementById("text").value;
+            let result = document.getElementById("result");
+
+            if (text.trim() === "") {
+                result.innerText = "Please enter a word!";
+                result.className = "error";
+                return;
+            }
+
             let reverse = "";
 
             for (let i = text.length - 1; i >= 0; i--) {
@@ -24,11 +164,11 @@
             }
 
             if (text === reverse) {
-                document.getElementById("result").innerText =
-                    "It is a Palindrome";
+                result.innerText = "✓ It is a Palindrome!";
+                result.className = "success";
             } else {
-                document.getElementById("result").innerText =
-                    "It is not a Palindrome";
+                result.innerText = "✗ It is not a Palindrome.";
+                result.className = "failure";
             }
         }
     </script>

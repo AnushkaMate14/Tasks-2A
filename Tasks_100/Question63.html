@@ -1,40 +1,178 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stopwatch</title>
 
     <style>
-        #display {
-            font-size: 40px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .container {
+            width: 450px;
+            max-width: 100%;
+            padding: 40px 30px;
+            background: white;
+            border-radius: 22px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 48px;
             margin-bottom: 15px;
         }
 
+        h2 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        #display {
+            padding: 25px 10px;
+            margin-bottom: 30px;
+            background: #f5f2ff;
+            border: 2px solid #e8e0ff;
+            border-radius: 15px;
+            color: #6546a5;
+            font-size: 42px;
+            font-weight: bold;
+            font-family: monospace;
+            letter-spacing: 2px;
+            box-shadow: inset 0 2px 8px rgba(102, 126, 234, 0.08);
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
         button {
-            padding: 8px 15px;
-            margin: 5px;
+            flex: 1;
+            padding: 13px 10px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
             cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .start {
+            background: #28a745;
+        }
+
+        .start:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .stop {
+            background: #e74c3c;
+        }
+
+        .stop:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        .reset {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .reset:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .footer {
+            margin-top: 25px;
+            color: #aaa;
+            font-size: 12px;
+        }
+
+        @media (max-width: 400px) {
+            .container {
+                padding: 30px 18px;
+            }
+
+            #display {
+                font-size: 32px;
+                padding: 22px 5px;
+            }
+
+            .buttons {
+                gap: 7px;
+            }
+
+            button {
+                padding: 12px 5px;
+                font-size: 12px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <h2>Stopwatch</h2>
+    <div class="container">
 
-    <div id="display">00:00:00</div>
+        <div class="icon">⏱️</div>
 
-    <button onclick="start()">Start</button>
-    <button onclick="stop()">Stop</button>
-    <button onclick="reset()">Reset</button>
+        <h2>Stopwatch</h2>
+
+        <p class="description">
+            Keep track of your time with precision.
+        </p>
+
+        <div id="display">00:00:00</div>
+
+        <div class="buttons">
+            <button class="start" onclick="start()">▶ Start</button>
+            <button class="stop" onclick="stop()">⏸ Stop</button>
+            <button class="reset" onclick="reset()">↻ Reset</button>
+        </div>
+
+        <p class="footer">Every second counts! ✨</p>
+
+    </div>
 
     <script>
-
         let seconds = 0;
-        let timer;
+        let timer = null;
 
         function start() {
 
+            if (timer !== null) {
+                return;
+            }
+
             timer = setInterval(function() {
+
                 seconds++;
 
                 let hours = Math.floor(seconds / 3600);
@@ -51,14 +189,16 @@
 
         function stop() {
             clearInterval(timer);
+            timer = null;
         }
 
         function reset() {
             clearInterval(timer);
+            timer = null;
             seconds = 0;
+
             document.getElementById("display").innerText = "00:00:00";
         }
-
     </script>
 
 </body>

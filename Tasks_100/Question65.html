@@ -1,43 +1,194 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toast Notification</title>
 
     <style>
-        #toast {
-            display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #333;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .container {
+            width: 450px;
+            max-width: 100%;
+            padding: 40px 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 27px;
+            margin-bottom: 12px;
+        }
+
+        .description {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        button {
+            padding: 14px 24px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 15px 20px;
-            border-radius: 5px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        #toast {
+            visibility: hidden;
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: calc(100% - 40px);
+            padding: 16px 20px;
+            background: #fff;
+            color: #333;
+            border-left: 5px solid #28a745;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+            z-index: 1000;
+        }
+
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .toast-icon {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            background: #e5f8eb;
+            color: #218838;
+            border-radius: 50%;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .toast-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .toast-message {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .footer {
+            color: #aaa;
+            font-size: 12px;
+            margin-top: 25px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            #toast {
+                top: 15px;
+                right: 15px;
+                padding: 13px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <h2>Toast Notification</h2>
+    <div class="container">
 
-    <button onclick="showToast()">Show Notification</button>
+        <div class="icon">🔔</div>
 
-    <div id="toast">Notification sent successfully!</div>
+        <h2>Toast Notification</h2>
+
+        <p class="description">
+            Click the button below to display a success notification.
+            It will disappear automatically after 3 seconds.
+        </p>
+
+        <button onclick="showToast()">
+            🔔 Show Notification
+        </button>
+
+        <p class="footer">Instant feedback for your actions ✨</p>
+
+    </div>
+
+    <div id="toast" role="status" aria-live="polite">
+        <div class="toast-icon">✓</div>
+
+        <div>
+            <p class="toast-title">Success!</p>
+            <p class="toast-message">
+                Notification sent successfully!
+            </p>
+        </div>
+    </div>
 
     <script>
+        let toastTimer;
 
         function showToast() {
 
             let toast = document.getElementById("toast");
 
-            toast.style.display = "block";
+            toast.classList.add("show");
 
-            setTimeout(function() {
-                toast.style.display = "none";
+            clearTimeout(toastTimer);
+
+            toastTimer = setTimeout(function() {
+                toast.classList.remove("show");
             }, 3000);
-        }
 
+        }
     </script>
 
 </body>

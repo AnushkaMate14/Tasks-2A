@@ -1,65 +1,248 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Validation</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .container {
+            width: 450px;
+            max-width: 100%;
+            padding: 35px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon {
+            text-align: center;
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            font-size: 27px;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        label {
+            display: block;
+            color: #444;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 2px solid #ddd;
+            border-radius: 9px;
+            outline: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 7px rgba(102, 126, 234, 0.2);
+        }
+
+        input.invalid {
+            border-color: #ef4444;
+        }
+
+        input.valid {
+            border-color: #22c55e;
+        }
+
+        .error {
+            color: #dc2626;
+            font-size: 12px;
+            margin-top: 6px;
+            min-height: 14px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 9px;
+            background: #667eea;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #5145cd;
+            transform: translateY(-2px);
+        }
+
+        #successMessage {
+            display: none;
+            padding: 12px;
+            margin-top: 18px;
+            border-radius: 8px;
+            background: #dcfce7;
+            color: #15803d;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        @media (max-width: 450px) {
+            .container {
+                padding: 25px 20px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <h2>Registration Form</h2>
+    <div class="container">
 
-    <form>
+        <div class="icon">📝</div>
 
-        <input type="text" id="name" placeholder="Enter name">
-        <p id="nameError"></p>
+        <h2>Registration Form</h2>
 
-        <input type="email" id="email" placeholder="Enter email">
-        <p id="emailError"></p>
+        <p class="description">Create your account by filling in the details.</p>
 
-        <input type="password" id="password" placeholder="Enter password">
-        <p id="passwordError"></p>
+        <form id="registrationForm" novalidate>
 
-        <button type="submit">Submit</button>
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="Enter your name">
+                <p class="error" id="nameError"></p>
+            </div>
 
-    </form>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email">
+                <p class="error" id="emailError"></p>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter password">
+                <p class="error" id="passwordError"></p>
+            </div>
+
+            <button type="submit" class="submit-btn">Create Account</button>
+
+            <p id="successMessage">✓ Registration form submitted successfully!</p>
+
+        </form>
+
+    </div>
 
     <script>
+        let nameInput = document.getElementById("name");
+        let emailInput = document.getElementById("email");
+        let passwordInput = document.getElementById("password");
 
-        document.getElementById("name").addEventListener("input", function () {
+        function validateName() {
+            let error = document.getElementById("nameError");
 
-            if (this.value === "") {
-                document.getElementById("nameError").innerText =
-                    "Name is required";
+            if (nameInput.value.trim() === "") {
+                error.innerText = "Name is required";
+                nameInput.className = "invalid";
+                return false;
             } else {
-                document.getElementById("nameError").innerText = "";
+                error.innerText = "";
+                nameInput.className = "valid";
+                return true;
             }
+        }
 
-        });
+        function validateEmail() {
+            let error = document.getElementById("emailError");
+            let email = emailInput.value.trim();
 
-
-        document.getElementById("email").addEventListener("input", function () {
-
-            if (this.value === "") {
-                document.getElementById("emailError").innerText =
-                    "Email is required";
+            if (email === "") {
+                error.innerText = "Email is required";
+                emailInput.className = "invalid";
+                return false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                error.innerText = "Please enter a valid email address";
+                emailInput.className = "invalid";
+                return false;
             } else {
-                document.getElementById("emailError").innerText = "";
+                error.innerText = "";
+                emailInput.className = "valid";
+                return true;
             }
+        }
 
-        });
+        function validatePassword() {
+            let error = document.getElementById("passwordError");
 
-
-        document.getElementById("password").addEventListener("input", function () {
-
-            if (this.value.length < 6) {
-                document.getElementById("passwordError").innerText =
-                    "Password must be at least 6 characters";
+            if (passwordInput.value.length < 6) {
+                error.innerText = "Password must be at least 6 characters";
+                passwordInput.className = "invalid";
+                return false;
             } else {
-                document.getElementById("passwordError").innerText = "";
+                error.innerText = "";
+                passwordInput.className = "valid";
+                return true;
             }
+        }
 
+        nameInput.addEventListener("input", validateName);
+        emailInput.addEventListener("input", validateEmail);
+        passwordInput.addEventListener("input", validatePassword);
+
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let isNameValid = validateName();
+            let isEmailValid = validateEmail();
+            let isPasswordValid = validatePassword();
+
+            if (isNameValid && isEmailValid && isPasswordValid) {
+                document.getElementById("successMessage").style.display = "block";
+            } else {
+                document.getElementById("successMessage").style.display = "none";
+            }
         });
-
     </script>
 
 </body>

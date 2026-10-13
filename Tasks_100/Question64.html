@@ -1,52 +1,170 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Theme Switcher</title>
 
     <style>
-        body {
-            background: white;
-            color: black;
-            text-align: center;
-            padding: 50px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .dark {
-            background: #222;
-            color: white;
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transition: background 0.4s ease;
+        }
+
+        .container {
+            width: 480px;
+            max-width: 100%;
+            padding: 45px 30px;
+            text-align: center;
+            background: white;
+            color: #333;
+            border-radius: 22px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+
+        .icon {
+            font-size: 55px;
+            margin-bottom: 18px;
+        }
+
+        h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #777;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 28px;
+            transition: color 0.4s ease;
         }
 
         button {
-            padding: 10px 20px;
+            padding: 13px 25px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
             cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .footer {
+            margin-top: 25px;
+            margin-bottom: 0;
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        /* Dark Mode */
+
+        body.dark {
+            background: linear-gradient(135deg, #141e30, #243b55);
+        }
+
+        .dark .container {
+            background: #252538;
+            color: white;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .dark p {
+            color: #c4c4d4;
+        }
+
+        .dark button {
+            background: linear-gradient(135deg, #f6b73c, #f09819);
+            color: #222;
+        }
+
+        .dark button:hover {
+            box-shadow: 0 6px 15px rgba(240, 152, 25, 0.25);
+        }
+
+        .dark .footer {
+            color: #9999b0;
+        }
+
+        @media (max-width: 450px) {
+            .container {
+                padding: 35px 20px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 
 <body id="page">
 
-    <h2>Theme Switcher</h2>
+    <div class="container">
 
-    <p>Click the button to change the theme.</p>
+        <div class="icon" id="themeIcon">☀️</div>
 
-    <button onclick="changeTheme()">Dark Mode</button>
+        <h2>Theme Switcher</h2>
+
+        <p id="description">
+            Click the button below to switch between light and dark mode.
+        </p>
+
+        <button id="themeButton" onclick="changeTheme()">
+            🌙 Dark Mode
+        </button>
+
+        <p class="footer">Customize your viewing experience ✨</p>
+
+    </div>
 
     <script>
-
         function changeTheme() {
 
             let page = document.getElementById("page");
-            let button = document.querySelector("button");
+            let button = document.getElementById("themeButton");
+            let icon = document.getElementById("themeIcon");
+            let description = document.getElementById("description");
 
             page.classList.toggle("dark");
 
             if (page.classList.contains("dark")) {
-                button.innerText = "Light Mode";
+
+                button.innerText = "☀️ Light Mode";
+                icon.innerText = "🌙";
+                description.innerText =
+                    "Dark mode is active. Enjoy a comfortable viewing experience.";
+
             } else {
-                button.innerText = "Dark Mode";
+
+                button.innerText = "🌙 Dark Mode";
+                icon.innerText = "☀️";
+                description.innerText =
+                    "Click the button below to switch between light and dark mode.";
+
             }
         }
-
     </script>
 
 </body>

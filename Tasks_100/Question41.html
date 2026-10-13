@@ -1,23 +1,155 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OTP Timer</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .otp-card {
+            background: white;
+            width: 380px;
+            max-width: 90%;
+            padding: 35px;
+            text-align: center;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .otp-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        #otp {
+            background: #f0f2ff;
+            color: #667eea;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 8px;
+            margin-bottom: 20px;
+        }
+
+        #timer {
+            color: #667eea;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover:not(:disabled) {
+            background: #4f46e5;
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            background: #b8b8b8;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
+
 <body>
 
-    <h2>OTP Verification</h2>
+    <div class="otp-card">
+        <div class="otp-icon">🔐</div>
 
-    <p id="timer">Resend OTP in 10 seconds</p>
+        <h2>OTP Verification</h2>
 
-    <button id="resend" disabled>Resend OTP</button>
+        <p class="description">Your OTP is ready for verification.</p>
+
+        <div id="otp">------</div>
+
+        <p id="timer">Resend OTP in 10 seconds</p>
+
+        <button id="resend" disabled>Resend OTP</button>
+    </div>
 
     <script>
-        setTimeout(function () {
-            document.getElementById("timer").innerText = "You can resend OTP now";
+        let timer;
+        let seconds = 10;
 
-            document.getElementById("resend").disabled = false;
-        }, 10000);
+        function generateOTP() {
+            let otp = Math.floor(100000 + Math.random() * 900000);
+
+            document.getElementById("otp").innerText = otp;
+        }
+
+        function startTimer() {
+            seconds = 10;
+
+            let button = document.getElementById("resend");
+            let timerText = document.getElementById("timer");
+
+            button.disabled = true;
+            timerText.innerText = "Resend OTP in " + seconds + " seconds";
+
+            clearInterval(timer);
+
+            timer = setInterval(function () {
+                seconds--;
+
+                if (seconds > 0) {
+                    timerText.innerText =
+                        "Resend OTP in " + seconds + " seconds";
+                } else {
+                    clearInterval(timer);
+
+                    timerText.innerText = "You can resend OTP now";
+                    button.disabled = false;
+                }
+            }, 1000);
+        }
+
+        document.getElementById("resend").addEventListener("click", function () {
+            generateOTP();
+            startTimer();
+        });
+
+        // Generate the first OTP and start the timer
+        generateOTP();
+        startTimer();
     </script>
 
 </body>
+
 </html>

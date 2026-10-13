@@ -1,15 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Debounce Search</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .search-card {
+            background: white;
+            width: 400px;
+            max-width: 90%;
+            padding: 35px;
+            text-align: center;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 28px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 0 12px;
+            transition: 0.3s;
+        }
+
+        .search-box:focus-within {
+            border-color: #667eea;
+            box-shadow: 0 0 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .search-icon {
+            font-size: 20px;
+            color: #667eea;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 10px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+
+        #result {
+            margin-top: 22px;
+            color: #667eea;
+            font-size: 16px;
+            min-height: 20px;
+        }
+    </style>
 </head>
+
 <body>
 
-    <h2>Search</h2>
+    <div class="search-card">
+        <h2>Debounce Search</h2>
 
-    <input type="text" id="search" placeholder="Type something...">
+        <div class="search-box">
+            <span class="search-icon">⌕</span>
+            <input type="text" id="search" placeholder="Type something...">
+        </div>
 
-    <p id="result"></p>
+        <p id="result"></p>
+    </div>
 
     <script>
         function debounce(callback, delay) {
@@ -23,7 +99,14 @@
         }
 
         function search() {
-            document.getElementById("result").innerText = "Searching...";
+            let value = document.getElementById("search").value;
+            let result = document.getElementById("result");
+
+            if (value.trim() === "") {
+                result.innerText = "";
+            } else {
+                result.innerText = "Searching for: " + value;
+            }
         }
 
         const debounceSearch = debounce(search, 1000);
@@ -33,4 +116,5 @@
     </script>
 
 </body>
+
 </html>

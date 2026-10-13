@@ -9,12 +9,15 @@
       //map() har element ko change/modify
       const updatedMarks = marks.map((mark) => mark + 5);
       console.log("Updated Marks:", updatedMarks);
+      document.write("Updated Marks: " + updatedMarks + "<br>");
       //filter() condition ke according elements select
       const passed = marks.filter((mark) => mark >= 50);
       console.log("Passed Marks:", passed);
+      document.write("Passed Marks: " + passed + "<br>");
       //reduce() sabko combine karke ek value
       const total = marks.reduce((sum, mark) => sum + mark, 0);
       console.log("Total Marks:", total);
+      document.write("Total Marks: " + total + "<br>");
     </script>
   </body>
 </html>

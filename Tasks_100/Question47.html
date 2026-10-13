@@ -1,17 +1,161 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Word and Character Counter</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .container {
+            width: 550px;
+            max-width: 100%;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon {
+            text-align: center;
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        textarea {
+            width: 100%;
+            height: 180px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            outline: none;
+            resize: vertical;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            line-height: 1.6;
+            transition: 0.3s;
+        }
+
+        textarea:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 7px rgba(102, 126, 234, 0.2);
+        }
+
+        .counter-box {
+            display: flex;
+            gap: 15px;
+            margin-top: 22px;
+        }
+
+        .counter {
+            flex: 1;
+            padding: 20px 10px;
+            text-align: center;
+            background: #f3f0ff;
+            border-radius: 12px;
+            border: 1px solid #e5ddff;
+        }
+
+        .counter p {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .counter span {
+            color: #6741d9;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            color: #aaa;
+            font-size: 12px;
+            margin-top: 22px;
+        }
+
+        @media (max-width: 450px) {
+            .container {
+                padding: 25px 18px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            .counter-box {
+                gap: 10px;
+            }
+
+            .counter span {
+                font-size: 25px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <h2>Word and Character Counter</h2>
+    <div class="container">
 
-    <textarea id="text" rows="6" cols="40"
-        placeholder="Type your text..."></textarea>
+        <div class="icon">📝</div>
 
-    <p>Characters: <span id="characters">0</span></p>
-    <p>Words: <span id="words">0</span></p>
+        <h2>Word & Character Counter</h2>
+
+        <p class="description">
+            Start typing below to count your words and characters instantly.
+        </p>
+
+        <textarea id="text" placeholder="Type your text here..."></textarea>
+
+        <div class="counter-box">
+
+            <div class="counter">
+                <p>Characters</p>
+                <span id="characters">0</span>
+            </div>
+
+            <div class="counter">
+                <p>Words</p>
+                <span id="words">0</span>
+            </div>
+
+        </div>
+
+        <p class="footer">Your text is counted instantly as you type ✨</p>
+
+    </div>
 
     <script>
         document.getElementById("text").addEventListener("input", function () {

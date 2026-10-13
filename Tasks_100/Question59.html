@@ -1,43 +1,226 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Preview</title>
 
     <style>
-        #preview {
-            width: 200px;
-            margin-top: 15px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .container {
+            width: 450px;
+            max-width: 100%;
+            padding: 35px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .upload-box {
+            padding: 25px 15px;
+            background: #f8f7ff;
+            border: 2px dashed #b8a8ed;
+            border-radius: 14px;
+            margin-bottom: 20px;
+        }
+
+        .upload-icon {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .upload-text {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        #imageInput {
             display: none;
+        }
+
+        .upload-button {
+            display: inline-block;
+            padding: 12px 22px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .upload-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .preview-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #preview {
+            display: block;
+            width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+            background: #f7f7f7;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            padding: 8px;
+            margin-bottom: 15px;
+        }
+
+        #fileName {
+            color: #666;
+            font-size: 13px;
+            overflow-wrap: anywhere;
+            margin-bottom: 15px;
+        }
+
+        #removeButton {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #ffe8e8;
+            color: #d93636;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #removeButton:hover {
+            background: #ffd4d4;
+        }
+
+        .footer {
+            color: #aaa;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 450px) {
+            .container {
+                padding: 25px 18px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <h2>Image Preview</h2>
+    <div class="container">
 
-    <input type="file" id="imageInput" accept="image/*">
+        <div class="icon">🖼️</div>
 
-    <br>
+        <h2>Image Preview</h2>
 
-    <img id="preview" alt="Image Preview">
+        <p class="description">
+            Select an image from your device to preview it instantly.
+        </p>
+
+        <div class="upload-box">
+            <div class="upload-icon">📤</div>
+
+            <p class="upload-text">
+                Choose an image from your device
+            </p>
+
+            <input type="file" id="imageInput" accept="image/*">
+
+            <label for="imageInput" class="upload-button">
+                Choose Image
+            </label>
+        </div>
+
+        <div class="preview-container" id="previewContainer">
+            <img id="preview" alt="Selected Image Preview">
+
+            <p id="fileName"></p>
+
+            <button id="removeButton" onclick="removeImage()">
+                ✕ Remove Image
+            </button>
+        </div>
+
+        <p class="footer">Your image preview appears instantly ✨</p>
+
+    </div>
 
     <script>
-
         let imageInput = document.getElementById("imageInput");
         let preview = document.getElementById("preview");
+        let previewContainer = document.getElementById("previewContainer");
+        let fileName = document.getElementById("fileName");
 
         imageInput.addEventListener("change", function() {
 
             let file = imageInput.files[0];
 
             if (file) {
+
+                if (!file.type.startsWith("image/")) {
+                    alert("Please select a valid image!");
+                    imageInput.value = "";
+                    return;
+                }
+
                 preview.src = URL.createObjectURL(file);
-                preview.style.display = "block";
+                previewContainer.style.display = "block";
+                fileName.innerText = file.name;
             }
 
         });
 
+        function removeImage() {
+
+            preview.src = "";
+            imageInput.value = "";
+            previewContainer.style.display = "none";
+            fileName.innerText = "";
+
+        }
     </script>
 
 </body>

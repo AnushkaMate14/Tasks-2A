@@ -1,23 +1,180 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memory Game</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .container {
+            width: 470px;
+            max-width: 100%;
+            padding: 35px;
+            background: white;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon {
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        #game {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin: 0 auto 20px;
+        }
+
+        .card {
+            width: 100%;
+            aspect-ratio: 1;
+            border: none;
+            border-radius: 12px;
+            background: #667eea;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.2);
+            transition: transform 0.25s, background 0.25s;
+        }
+
+        .card:hover {
+            background: #5145cd;
+            transform: translateY(-3px);
+        }
+
+        .card.flipped {
+            background: #f3f0ff;
+            color: #6741d9;
+            border: 2px solid #c4b5fd;
+            transform: scale(1.03);
+        }
+
+        .card.matched {
+            background: #dcfce7;
+            color: #15803d;
+            border: 2px solid #86efac;
+            cursor: default;
+            box-shadow: none;
+        }
+
+        .card.matched:hover {
+            transform: none;
+        }
+
+        #message {
+            min-height: 30px;
+            color: #15803d;
+            font-size: 22px;
+            margin: 15px 0;
+        }
+
+        #restart {
+            display: none;
+            width: 100%;
+            padding: 13px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 9px;
+            background: #667eea;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #restart:hover {
+            background: #5145cd;
+            transform: translateY(-2px);
+        }
+
+        .hint {
+            color: #aaa;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 450px) {
+            .container {
+                padding: 25px 18px;
+            }
+
+            #game {
+                gap: 8px;
+            }
+
+            .card {
+                font-size: 24px;
+                border-radius: 9px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <h2>Memory Game</h2>
+    <div class="container">
 
-    <div id="game"></div>
+        <div class="icon">🧠</div>
 
-    <h2 id="message"></h2>
+        <h2>Memory Game</h2>
 
-    <button id="restart" onclick="restartGame()" style="display:none;">
-        Restart Game
-    </button>
+        <p class="description">
+            Find all matching number pairs to win!
+        </p>
+
+        <div id="game"></div>
+
+        <h2 id="message"></h2>
+
+        <button id="restart" onclick="restartGame()">
+            🔄 Restart Game
+        </button>
+
+        <p class="hint">Flip two cards and remember their numbers.</p>
+
+    </div>
 
     <script>
-
         let numbers = [1, 2, 3, 4, 1, 2, 3, 4];
 
         let firstCard = null;
@@ -43,19 +200,17 @@
                 let card = document.createElement("button");
 
                 card.innerText = "?";
-
-                card.style.width = "70px";
-                card.style.height = "70px";
-                card.style.margin = "5px";
-                card.style.fontSize = "25px";
+                card.className = "card";
 
                 card.onclick = function() {
 
-                    if (lock || card === firstCard) {
+                    if (lock || card === firstCard ||
+                        card.classList.contains("matched")) {
                         return;
                     }
 
                     card.innerText = number;
+                    card.classList.add("flipped");
 
                     if (firstCard === null) {
 
@@ -68,6 +223,12 @@
 
                         if (firstCard.innerText === secondCard.innerText) {
 
+                            firstCard.classList.remove("flipped");
+                            secondCard.classList.remove("flipped");
+
+                            firstCard.classList.add("matched");
+                            secondCard.classList.add("matched");
+
                             matched++;
 
                             firstCard = null;
@@ -79,7 +240,7 @@
                                     "🎉 You Win!";
 
                                 document.getElementById("restart").style.display =
-                                    "inline-block";
+                                    "block";
                             }
 
                         } else {
@@ -88,6 +249,9 @@
 
                                 firstCard.innerText = "?";
                                 secondCard.innerText = "?";
+
+                                firstCard.classList.remove("flipped");
+                                secondCard.classList.remove("flipped");
 
                                 firstCard = null;
                                 secondCard = null;
@@ -107,7 +271,6 @@
         }
 
         startGame();
-
     </script>
 
 </body>

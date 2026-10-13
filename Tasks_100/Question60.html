@@ -1,37 +1,138 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Star Rating</title>
 
     <style>
-        .star {
-            font-size: 40px;
-            color: gray;
-            cursor: pointer;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .active {
-            color: gold;
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .container {
+            width: 420px;
+            max-width: 100%;
+            padding: 40px 25px;
+            text-align: center;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        #stars {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 22px;
+        }
+
+        .star {
+            font-size: 45px;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+            user-select: none;
+        }
+
+        .star:hover {
+            transform: scale(1.2);
+        }
+
+        .star.active {
+            color: #ffbd35;
+        }
+
+        #rating {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #f3f0ff;
+            color: #6546a5;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 25px;
+            color: #aaa;
+            font-size: 12px;
+        }
+
+        @media (max-width: 400px) {
+            .container {
+                padding: 30px 15px;
+            }
+
+            .star {
+                font-size: 36px;
+            }
+
+            #stars {
+                gap: 5px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <h2>Rate Us</h2>
+    <div class="container">
 
-    <div id="stars">
-        <span class="star">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
+        <div class="icon">⭐</div>
+
+        <h2>Rate Us</h2>
+
+        <p class="description">
+            How was your experience? Select a star to rate us.
+        </p>
+
+        <div id="stars">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+        </div>
+
+        <p id="rating">Rating: 0/5</p>
+
+        <p class="footer">Your feedback matters to us 💜</p>
+
     </div>
 
-    <p id="rating">Rating: 0/5</p>
-
     <script>
-
         let stars = document.querySelectorAll(".star");
         let rating = document.getElementById("rating");
 
@@ -48,10 +149,10 @@
                 }
 
                 rating.innerText = "Rating: " + (index + 1) + "/5";
+
             });
 
         });
-
     </script>
 
 </body>

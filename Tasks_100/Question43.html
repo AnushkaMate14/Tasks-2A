@@ -1,15 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Quote Generator</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .quote-card {
+            background: white;
+            width: 500px;
+            max-width: 100%;
+            padding: 40px 30px;
+            text-align: center;
+            border-radius: 22px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+
+        .quote-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .quote-icon {
+            font-size: 55px;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 27px;
+            margin-bottom: 25px;
+        }
+
+        #quote {
+            color: #555;
+            font-size: 21px;
+            line-height: 1.7;
+            min-height: 90px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .divider {
+            width: 60px;
+            height: 4px;
+            background: #667eea;
+            border-radius: 5px;
+            margin: 0 auto 25px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        .footer {
+            color: #999;
+            font-size: 12px;
+            margin-top: 25px;
+        }
+
+        @media (max-width: 480px) {
+            .quote-card {
+                padding: 30px 20px;
+            }
+
+            h2 {
+                font-size: 23px;
+            }
+
+            #quote {
+                font-size: 18px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-    <h2>Random Quote Generator</h2>
+    <div class="quote-card">
 
-    <p id="quote">Click the button to get a quote.</p>
+        <div class="quote-icon">❝</div>
 
-    <button onclick="generateQuote()">New Quote</button>
+        <h2>Random Quote Generator</h2>
+
+        <p id="quote" aria-live="polite">
+            Click the button to get a quote.
+        </p>
+
+        <div class="divider"></div>
+
+        <button onclick="generateQuote()">✨ New Quote</button>
+
+        <p class="footer">A little inspiration for your day</p>
+
+    </div>
 
     <script>
         const quotes = [
@@ -23,9 +144,11 @@
         function generateQuote() {
             let randomIndex = Math.floor(Math.random() * quotes.length);
 
-            document.getElementById("quote").innerText = quotes[randomIndex];
+            document.getElementById("quote").innerText =
+                quotes[randomIndex];
         }
     </script>
 
 </body>
+
 </html>

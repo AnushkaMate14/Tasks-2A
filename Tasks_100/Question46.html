@@ -1,31 +1,164 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Number Sorting</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .container {
+            width: 450px;
+            max-width: 100%;
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 27px;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 9px;
+            outline: none;
+            font-size: 15px;
+            margin-bottom: 18px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 7px rgba(102, 126, 234, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 9px;
+            background: #667eea;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #5145cd;
+            transform: translateY(-2px);
+        }
+
+        #result {
+            margin-top: 22px;
+            padding: 15px;
+            border-radius: 9px;
+            background: #f3f0ff;
+            color: #5145cd;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px 20px;
+            }
+
+            h2 {
+                font-size: 23px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <h2>Number Sorting</h2>
+    <div class="container">
+        <div class="icon">🔢</div>
 
-    <input type="text" id="numbers" placeholder="Enter numbers">
+        <h2>Number Sorting</h2>
 
-    <button onclick="sortNumbers()">Sort</button>
+        <p class="description">
+            Enter numbers separated by commas and sort them
+            from smallest to largest.
+        </p>
 
-    <p id="result"></p>
+        <input
+            type="text"
+            id="numbers"
+            placeholder="Example: 45, 12, 89, 3"
+        >
+
+        <button onclick="sortNumbers()">Sort Numbers ↕</button>
+
+        <p id="result"></p>
+    </div>
 
     <script>
         function sortNumbers() {
+            let input = document.getElementById("numbers").value.trim();
+            let result = document.getElementById("result");
 
-            let input = document.getElementById("numbers").value;
+            if (input === "") {
+                result.innerText = "Please enter some numbers!";
+                result.style.display = "block";
+                return;
+            }
 
-            let numbers = input.split(",").map(Number);
+            let values = input.split(",").map(value => value.trim());
+
+            if (values.some(value => value === "" || isNaN(Number(value)))) {
+                result.innerText = "Please enter valid numbers separated by commas!";
+                result.style.display = "block";
+                return;
+            }
+
+            let numbers = values.map(Number);
 
             numbers.sort(function(a, b) {
                 return a - b;
             });
 
-            document.getElementById("result").innerText =
-                "Sorted Numbers: " + numbers;
+            result.innerText = "Sorted Numbers: " + numbers.join(", ");
+            result.style.display = "block";
         }
     </script>
 

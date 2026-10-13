@@ -1,34 +1,167 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Delegation</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .container {
+            width: 600px;
+            max-width: 100%;
+            padding: 35px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon {
+            text-align: center;
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        #cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .card {
+            min-height: 130px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 14px;
+            background: #f3f0ff;
+            border: 2px solid #e5ddff;
+            color: #6741d9;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            background: #667eea;
+            border-color: #667eea;
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 18px rgba(102, 126, 234, 0.25);
+        }
+
+        #message {
+            display: none;
+            margin-top: 22px;
+            padding: 14px;
+            border-radius: 10px;
+            background: #dcfce7;
+            color: #15803d;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .hint {
+            margin-top: 22px;
+            text-align: center;
+            color: #aaa;
+            font-size: 12px;
+        }
+
+        @media (max-width: 450px) {
+            .container {
+                padding: 25px 18px;
+            }
+
+            #cards {
+                gap: 10px;
+            }
+
+            .card {
+                min-height: 100px;
+                font-size: 17px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <h2>Card List</h2>
+    <div class="container">
 
-    <div id="cards">
+        <div class="icon">🃏</div>
 
-        <div class="card">Card 1</div>
-        <div class="card">Card 2</div>
-        <div class="card">Card 3</div>
-        <div class="card">Card 4</div>
+        <h2>Event Delegation</h2>
+
+        <p class="description">
+            Click any card to see event delegation in action!
+        </p>
+
+        <div id="cards">
+
+            <div class="card">Card 1</div>
+            <div class="card">Card 2</div>
+            <div class="card">Card 3</div>
+            <div class="card">Card 4</div>
+
+        </div>
+
+        <p id="message"></p>
+
+        <p class="hint">Click on any card above 👆</p>
 
     </div>
 
     <script>
-
         document.getElementById("cards").addEventListener("click", function(event) {
 
             if (event.target.classList.contains("card")) {
 
-                alert(event.target.innerText + " clicked!");
+                let message = document.getElementById("message");
+
+                message.innerText = event.target.innerText + " clicked successfully! ✓";
+                message.style.display = "block";
 
             }
 
         });
-
     </script>
 
 </body>

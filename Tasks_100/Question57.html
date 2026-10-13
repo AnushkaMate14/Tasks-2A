@@ -1,42 +1,184 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tab Switching</title>
 
     <style>
-        .content {
-            display: none;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .active {
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .container {
+            width: 550px;
+            max-width: 100%;
+            padding: 35px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            padding: 6px;
+            background: #f3f0ff;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 12px 10px;
+            border: none;
+            border-radius: 9px;
+            background: transparent;
+            color: #666;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab-button:hover {
+            color: #764ba2;
+        }
+
+        .tab-button.active-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .content {
+            display: none;
+            padding: 25px;
+            background: #faf9ff;
+            border: 1px solid #eee8ff;
+            border-radius: 12px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .content.active {
             display: block;
+        }
+
+        .content h2 {
+            color: #6546a5;
+            font-size: 23px;
+            margin-bottom: 12px;
+        }
+
+        .content p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 450px) {
+            .container {
+                padding: 22px 16px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .tab-buttons {
+                gap: 5px;
+            }
+
+            .tab-button {
+                padding: 11px 5px;
+                font-size: 13px;
+            }
+
+            .content {
+                padding: 20px;
+            }
         }
     </style>
 </head>
+
 <body>
 
-    <button onclick="showTab('home')">Home</button>
-    <button onclick="showTab('about')">About</button>
-    <button onclick="showTab('contact')">Contact</button>
+    <div class="container">
 
-    <div id="home" class="content active">
-        <h2>Home</h2>
-        <p>Welcome to Home page.</p>
-    </div>
+        <h1>Tab Switching</h1>
 
-    <div id="about" class="content">
-        <h2>About</h2>
-        <p>This is About page.</p>
-    </div>
+        <p class="description">
+            Click a tab to explore its content.
+        </p>
 
-    <div id="contact" class="content">
-        <h2>Contact</h2>
-        <p>Contact us here.</p>
+        <div class="tab-buttons">
+            <button class="tab-button active-button"
+                onclick="showTab('home', this)">Home</button>
+
+            <button class="tab-button"
+                onclick="showTab('about', this)">About</button>
+
+            <button class="tab-button"
+                onclick="showTab('contact', this)">Contact</button>
+        </div>
+
+        <div id="home" class="content active">
+            <h2>🏠 Home</h2>
+            <p>Welcome to Home page. Explore our website and discover more about us.</p>
+        </div>
+
+        <div id="about" class="content">
+            <h2>👋 About Us</h2>
+            <p>This is About page. Here you can learn more about our website and what we do.</p>
+        </div>
+
+        <div id="contact" class="content">
+            <h2>📩 Contact Us</h2>
+            <p>Contact us here. We would love to hear your questions, ideas, and feedback.</p>
+        </div>
+
     </div>
 
     <script>
-
-        function showTab(tabName) {
+        function showTab(tabName, clickedButton) {
 
             let tabs = document.querySelectorAll(".content");
 
@@ -45,8 +187,15 @@
             });
 
             document.getElementById(tabName).classList.add("active");
-        }
 
+            let buttons = document.querySelectorAll(".tab-button");
+
+            buttons.forEach(function(button) {
+                button.classList.remove("active-button");
+            });
+
+            clickedButton.classList.add("active-button");
+        }
     </script>
 
 </body>

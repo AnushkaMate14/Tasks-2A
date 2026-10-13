@@ -1,19 +1,138 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Number Guessing Game</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .game-card {
+            background: white;
+            width: 420px;
+            max-width: 100%;
+            padding: 40px 30px;
+            text-align: center;
+            border-radius: 22px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .game-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 27px;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            color: #777;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            outline: none;
+            font-size: 17px;
+            text-align: center;
+            margin-bottom: 18px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 8px rgba(102, 126, 234, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        #result {
+            margin-top: 22px;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 1.5;
+            min-height: 24px;
+        }
+
+        .footer {
+            color: #aaa;
+            font-size: 12px;
+            margin-top: 25px;
+        }
+    </style>
 </head>
+
 <body>
 
-    <h2>Number Guessing Game</h2>
+    <div class="game-card">
 
-    <p>Guess a number between 1 and 10</p>
+        <div class="game-icon">🎯</div>
 
-    <input type="number" id="guess" placeholder="Enter number">
+        <h2>Number Guessing Game</h2>
 
-    <button onclick="checkGuess()">Guess</button>
+        <p class="description">
+            Guess the secret number between <strong>1 and 10</strong>!
+        </p>
 
-    <p id="result"></p>
+        <input type="number" id="guess" placeholder="Enter your guess"
+            min="1" max="10">
+
+        <button onclick="checkGuess()">Check My Guess</button>
+
+        <p id="result" aria-live="polite"></p>
+
+        <p class="footer">Good luck! Keep trying until you win.</p>
+
+    </div>
 
     <script>
         let randomNumber = Math.floor(Math.random() * 10) + 1;
@@ -21,21 +140,27 @@
         function checkGuess() {
 
             let guess = Number(document.getElementById("guess").value);
+            let result = document.getElementById("result");
 
-            if (guess === randomNumber) {
-                document.getElementById("result").innerText =
-                    "Correct! You guessed the number.";
+            if (guess < 1 || guess > 10 || document.getElementById("guess").value === "") {
+                result.innerText = "Please enter a number between 1 and 10.";
+                result.style.color = "#d97706";
+            }
+            else if (guess === randomNumber) {
+                result.innerText = "🎉 Correct! You guessed the number.";
+                result.style.color = "#16a34a";
             }
             else if (guess < randomNumber) {
-                document.getElementById("result").innerText =
-                    "Too low! Try again.";
+                result.innerText = "⬆️ Too low! Try a higher number.";
+                result.style.color = "#667eea";
             }
             else {
-                document.getElementById("result").innerText =
-                    "Too high! Try again.";
+                result.innerText = "⬇️ Too high! Try a lower number.";
+                result.style.color = "#e11d48";
             }
         }
     </script>
 
 </body>
+
 </html>
